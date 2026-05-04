@@ -1,43 +1,25 @@
-# Astro Starter Kit: Minimal
+# Badis Merakchi — Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Personal portfolio website for my Cloud & DevOps engineering profile.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The website presents my technical skills, consulting experience, selected personal projects, and contact information.
 
-## 🚀 Project Structure
+## Tech Stack
 
-Inside of your Astro project, you'll see the following folders and files:
+- Astro
+- HTML / CSS
+- GitHub Pages
+- Custom domain
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Website
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+https://badismerakchi.com
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Purpose
 
-Any static assets, like images, can be placed in the `public/` directory.
+This portfolio is designed as a professional landing page for Cloud, DevOps, and infrastructure engineering opportunities around Geneva and Switzerland.
 
-## 🧞 Commands
+## Author
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Badis Merakchi  
+Cloud & DevOps Engineer
