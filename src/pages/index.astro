@@ -1,4 +1,39 @@
 ---
+const featuredProject = {
+  title: "AWS EKS Platform Golden Path",
+  description:
+    "End-to-end Platform Engineering lab for provisioning, deploying, observing, validating, and destroying an ephemeral AWS EKS platform.",
+  metrics: [
+    ["Platform", "AWS EKS"],
+    ["Delivery", "Terraform + Helm"],
+    ["Runtime", "FastAPI on Kubernetes"],
+    ["Lifecycle", "Deploy · Observe · Destroy"],
+  ],
+  proof:
+    "Demonstrates Terraform, EKS, Helm, Grafana, CI/CD, observability, IAM/OIDC, and FinOps-aware infrastructure lifecycle.",
+  highlights: [
+    "Terraform-managed AWS infrastructure with S3 remote backend",
+    "Amazon EKS, ECR, IAM/OIDC and namespace-scoped RBAC",
+    "FastAPI service packaged with Docker and deployed with Helm",
+    "GitHub Actions CI/CD with controlled manual deployments",
+    "Prometheus and Grafana observability with ServiceMonitor validation",
+    "Cost-aware ephemeral infrastructure lifecycle",
+  ],
+  stack: [
+    "AWS",
+    "EKS",
+    "Terraform",
+    "Helm",
+    "Docker",
+    "FastAPI",
+    "GitHub Actions",
+    "IAM/OIDC",
+    "Prometheus",
+    "Grafana",
+  ],
+  link: "https://github.com/Badis-M/aws-eks-platform-golden-path",
+};
+
 const projects = [
   {
     title: "AWS Ephemeral Web Platform",
@@ -28,16 +63,16 @@ const skills = [
   ["Infrastructure as Code", "Terraform"],
   ["Automation", "Bash, GitHub Actions, CI/CD"],
   ["Containers", "Docker, Kubernetes, EKS, Helm"],
-  ["Configuration", "Ansible, Server provisioning, Service Configuration"],
+  ["Provisioning & Configuration", "Ansible, server provisioning, service configuration"],
   ["Security", "IAM, SSO, cloud governance"],
   ["Networking", "VPC, DNS, HTTPS, secure connectivity"],
   ["Linux & Systems", "Linux administration, patching, troubleshooting"],
-  ["Databases", "MySQL, ATP, Database migration support, operational maintenance"],
+  ["Databases", "MySQL, Oracle ATP, database migration support"],
   ["Data Workflows", "ETL workflows, data handling, data processing"],
   ["Operations", "Monitoring, auditing, incident support"],
   ["Cost Control", "FinOps, cleanup automation, budget alerts"],
   ["Client Delivery", "Workshops, stakeholder support, consulting"],
-  ["Tooling", "Git, GitHub, VS Code, CLI workflows"],
+  ["Developer Tooling", "Git, GitHub, VS Code, CLI workflows"],
   ["Web Delivery", "Reverse proxy, HTTPS, DNS integration"],
 ];
 
@@ -111,8 +146,8 @@ const additionalExperiences = [
 
           <div class="actions">
             <a class="button primary" href="/Badis-Merakchi-CV.pdf">Download CV</a>
-            <a class="button secondary" href="https://github.com/Badis-M" target="_blank">GitHub ↗</a>
-            <a class="button secondary" href="https://www.linkedin.com/in/merakchi" target="_blank">LinkedIn ↗</a>
+            <a class="button secondary" href="https://github.com/Badis-M" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a class="button secondary" href="https://www.linkedin.com/in/merakchi" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
           </div>
         </div>
 
@@ -183,14 +218,14 @@ const additionalExperiences = [
 
           <div class="experience-columns">
             <div>
-              <h4>Client environments</h4>
+              <h4>Selected client environments</h4>
               <div class="client-list">
                 {clientEnvironments.map((client) => <span>{client}</span>)}
               </div>
             </div>
 
             <div>
-              <h4>Mission areas</h4>
+              <h4>Delivery areas</h4>
               <div class="mission-list">
                 {missionAreas.map((mission) => <span>{mission}</span>)}
               </div>
@@ -222,6 +257,53 @@ const additionalExperiences = [
           <h2>Hands-on Cloud & DevOps projects built to validate real infrastructure patterns</h2>
         </div>
 
+        <article class="featured-project-card">
+          <div class="featured-copy">
+            <div class="featured-topline">
+              <p class="featured-label">Featured project</p>
+              <span>Platform Engineering Lab</span>
+            </div>
+
+            <h3>{featuredProject.title}</h3>
+            <p>{featuredProject.description}</p>
+            <p class="featured-proof">{featuredProject.proof}</p>
+
+            <div class="featured-metrics">
+              {featuredProject.metrics.map(([label, value]) => (
+                <div>
+                  <span>{label}</span>
+                  <strong>{value}</strong>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="featured-meta">
+            <div>
+              <h4>Project scope</h4>
+              <ul class="featured-highlights">
+                {featuredProject.highlights.map((highlight) => <li>{highlight}</li>)}
+              </ul>
+            </div>
+
+            <div>
+              <h4>Stack</h4>
+              <div class="tags">
+                {featuredProject.stack.map((item) => <span>{item}</span>)}
+              </div>
+            </div>
+
+            <a href={featuredProject.link} target="_blank" rel="noopener noreferrer">View featured repository →</a>
+          </div>
+        </article>
+
+        <div class="project-subhead-card">
+          <div>
+            <p>Other personal projects</p>
+            <h3>Additional labs covering AWS automation, observability, and application delivery</h3>
+          </div>
+        </div>
+
         <div class="projects-grid">
           {projects.map((project) => (
             <article class="project-card">
@@ -232,7 +314,7 @@ const additionalExperiences = [
                 {project.stack.map((item) => <span>{item}</span>)}
               </div>
 
-              <a href={project.link} target="_blank">View repository →</a>
+              <a href={project.link} target="_blank" rel="noopener noreferrer">View repository →</a>
             </article>
           ))}
         </div>
@@ -266,11 +348,15 @@ const additionalExperiences = [
 
           <div>
             <span>Profiles</span>
-            <a href="https://github.com/Badis-M" target="_blank">GitHub</a>
-            <a href="https://www.linkedin.com/in/merakchi" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Badis-M" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/merakchi" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
         </div>
       </section>
+
+      <footer class="footer">
+        <p>© 2026 Badis Merakchi · Built with Astro · Deployed on GitHub Pages</p>
+      </footer>
     </main>
   </body>
 </html>
@@ -326,17 +412,30 @@ const additionalExperiences = [
 
   nav {
     display: flex;
-    gap: 22px;
+    gap: 12px;
   }
 
   nav a {
-    color: #94a3b8;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 999px;
+    padding: 9px 13px;
+    color: #cbd5e1;
     font-size: 14px;
+    font-weight: 800;
     text-decoration: none;
+    background: rgba(15, 23, 42, 0.52);
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      background 180ms ease,
+      color 180ms ease;
   }
 
   nav a:hover {
-    color: #e2e8f0;
+    transform: translateY(-1px);
+    border-color: rgba(56, 189, 248, 0.42);
+    color: #f8fafc;
+    background: rgba(15, 23, 42, 0.92);
   }
 
   .hero {
@@ -429,6 +528,8 @@ const additionalExperiences = [
   }
 
   .profile-card,
+  .featured-project-card,
+  .project-subhead-card,
   .project-card,
   .skill-card,
   .experience,
@@ -605,6 +706,170 @@ const additionalExperiences = [
     margin-bottom: 18px;
   }
 
+  .featured-project-card {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 28px;
+    padding: 0;
+    margin-bottom: 22px;
+    overflow: hidden;
+    border-color: rgba(56, 189, 248, 0.34);
+    background:
+      radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.16), transparent 18rem),
+      radial-gradient(circle at 90% 10%, rgba(99, 102, 241, 0.16), transparent 20rem),
+      rgba(15, 23, 42, 0.86);
+  }
+
+  .featured-copy,
+  .featured-meta {
+    padding: 30px;
+  }
+
+  .featured-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 440px;
+  }
+
+  .featured-meta {
+    display: grid;
+    gap: 24px;
+    border-left: 1px solid rgba(148, 163, 184, 0.14);
+    background: rgba(2, 6, 23, 0.24);
+  }
+
+  .featured-topline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .featured-topline span {
+    border: 1px solid rgba(56, 189, 248, 0.22);
+    border-radius: 999px;
+    padding: 7px 10px;
+    color: #bae6fd;
+    font-size: 12px;
+    font-weight: 800;
+    background: rgba(56, 189, 248, 0.08);
+  }
+
+  .featured-project-card h3 {
+    max-width: 760px;
+    margin-bottom: 18px;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.02;
+  }
+
+  .featured-project-card p {
+    max-width: 760px;
+    margin-bottom: 28px;
+    font-size: 18px;
+  }
+
+  .featured-proof {
+    border-left: 3px solid rgba(56, 189, 248, 0.55);
+    padding-left: 14px;
+    color: #bae6fd;
+    font-size: 16px;
+  }
+
+  .featured-label,
+  .project-subhead-card p {
+    margin: 0;
+    color: #fb7185;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .featured-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .featured-metrics div {
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    border-radius: 16px;
+    padding: 14px;
+    background: rgba(2, 6, 23, 0.32);
+  }
+
+  .featured-metrics span {
+    display: block;
+    margin-bottom: 6px;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .featured-metrics strong {
+    color: #e2e8f0;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .featured-highlights {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .featured-highlights li {
+    color: #dbeafe;
+  }
+
+  .featured-meta a {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    border: 1px solid rgba(56, 189, 248, 0.26);
+    border-radius: 12px;
+    padding: 12px 14px;
+    color: #06111f;
+    font-weight: 900;
+    text-decoration: none;
+    background: #38bdf8;
+  }
+
+  .featured-meta a:hover {
+    background: #7dd3fc;
+  }
+
+  .project-subhead-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 20px 22px;
+    margin-bottom: 18px;
+  }
+
+  .project-subhead-card h3 {
+    margin: 8px 0 0;
+    font-size: 18px;
+  }
+
+  .project-subhead-card > span {
+    flex: 0 0 auto;
+    border: 1px solid rgba(251, 113, 133, 0.24);
+    border-radius: 999px;
+    padding: 7px 10px;
+    color: #fecdd3;
+    font-size: 12px;
+    font-weight: 900;
+    background: rgba(251, 113, 133, 0.08);
+  }
+
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -618,6 +883,7 @@ const additionalExperiences = [
     padding: 24px;
   }
 
+  .featured-project-card:hover,
   .project-card:hover,
   .skill-card:hover,
   .additional-experience-card:hover {
@@ -739,11 +1005,23 @@ const additionalExperiences = [
     color: #fb7185;
   }
 
+  .footer {
+    padding: 28px 0 42px;
+    border-top: 1px solid rgba(148, 163, 184, 0.14);
+  }
+
+  .footer p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+  }
+
   @media (max-width: 1000px) {
     .skills-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .featured-project-card,
     .projects-grid,
     .hero,
     .experience-header,
@@ -751,6 +1029,15 @@ const additionalExperiences = [
     .additional-experience-grid,
     .contact {
       grid-template-columns: 1fr;
+    }
+
+    .featured-meta {
+      border-left: 0;
+      border-top: 1px solid rgba(148, 163, 184, 0.14);
+    }
+
+    .featured-copy {
+      min-height: auto;
     }
   }
 
@@ -775,6 +1062,16 @@ const additionalExperiences = [
 
     h1 {
       font-size: clamp(40px, 13vw, 58px);
+    }
+
+    .featured-metrics,
+    .project-subhead-card {
+      grid-template-columns: 1fr;
+    }
+
+    .project-subhead-card {
+      align-items: flex-start;
+      flex-direction: column;
     }
   }
 </style>
