@@ -10,9 +10,15 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "npm run build && npm run preview"
+    "check": "npm run build && npm run preview",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
-    "astro": "^6.2.1"
+    "@astrojs/check": "^0.9.9",
+    "astro": "^6.2.1",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.0"
   }
 }
