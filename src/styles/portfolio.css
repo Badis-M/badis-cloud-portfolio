@@ -55,7 +55,7 @@
   .side-nav {
     position: fixed;
     top: 50%;
-    left: 28px;
+    left: max(16px, calc((100vw - 1180px) / 2 - 172px));
     z-index: 20;
     display: grid;
     gap: 10px;
@@ -761,10 +761,13 @@
     font-size: 14px;
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1500px) {
     .side-nav {
       display: none;
     }
+  }
+
+  @media (max-width: 1000px) {
     .skills-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
