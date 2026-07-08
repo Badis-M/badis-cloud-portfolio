@@ -7,7 +7,6 @@ type PortfolioContent = (typeof portfolioContent)[keyof typeof portfolioContent]
 const page = (Astro.props.content ?? portfolioContent.en) as PortfolioContent;
 ---
 
-
 <html lang={page.lang}>
   <head>
     <meta charset="utf-8" />
@@ -161,7 +160,6 @@ const page = (Astro.props.content ?? portfolioContent.en) as PortfolioContent;
           <div class="featured-copy">
             <div class="featured-topline">
               <p class="featured-label">{page.projectsSection.featuredLabel}</p>
-              <span>{page.projectsSection.featuredType}</span>
             </div>
 
             <h3>{page.featuredProject.title}</h3>
@@ -201,15 +199,30 @@ const page = (Astro.props.content ?? portfolioContent.en) as PortfolioContent;
           <div class="spotlight-copy">
             <div class="featured-topline">
               <p class="featured-label">{page.projectsSection.spotlightLabel}</p>
-              <span>{page.projectsSection.spotlightType}</span>
             </div>
 
             <h3>{page.spotlightProject.title}</h3>
             <p>{page.spotlightProject.description}</p>
             <p class="featured-proof">{page.spotlightProject.proof}</p>
+
+            <div class="featured-metrics">
+              {page.spotlightProject.metrics.map(([label, value]) => (
+                <div>
+                  <span>{label}</span>
+                  <strong>{value}</strong>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div class="spotlight-meta">
+            <div>
+              <h4>{page.projectsSection.scopeTitle}</h4>
+              <ul class="featured-highlights">
+                {page.spotlightProject.highlights.map((highlight) => <li>{highlight}</li>)}
+              </ul>
+            </div>
+
             <div>
               <h4>{page.projectsSection.stackTitle}</h4>
               <div class="tags">
@@ -241,7 +254,7 @@ const page = (Astro.props.content ?? portfolioContent.en) as PortfolioContent;
               </div>
 
               <div class="project-links">
-               {"liveUrl" in project && project.liveUrl && (
+                {"liveUrl" in project && project.liveUrl && (
                   <a class="project-link live" href={project.liveUrl} target="_blank" rel="noopener noreferrer">{page.projectsSection.liveSiteLabel}</a>
                 )}
                 <a class="project-link" href={project.link} target="_blank" rel="noopener noreferrer">{page.projectsSection.repositoryLabel}</a>
@@ -286,6 +299,7 @@ const page = (Astro.props.content ?? portfolioContent.en) as PortfolioContent;
         <p>{page.footer}</p>
       </footer>
     </main>
+
     <script>
       const sideNavLinks = Array.from(
         document.querySelectorAll<HTMLAnchorElement>('.side-nav a')

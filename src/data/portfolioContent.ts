@@ -102,9 +102,7 @@ export const portfolioContent = {
       eyebrow: "Personal projects",
       title: "Hands-on Cloud & DevOps projects built to validate real infrastructure patterns",
       featuredLabel: "Featured project",
-      featuredType: "Platform Engineering Lab",
       spotlightLabel: "Cloud migration spotlight",
-      spotlightType: "Azure App Migration",
       scopeTitle: "Project scope",
       stackTitle: "Stack",
       featuredRepositoryLabel: "View featured repository →",
@@ -208,8 +206,22 @@ export const portfolioContent = {
       title: "Azure Legacy App Migration",
       description:
         "Progressive Azure migration modernizing a legacy-style FastAPI application into a cloud-native AKS platform with PostgreSQL, Docker, Kustomize, Terraform, ACR, GitHub Actions OIDC, and Prometheus/Grafana observability.",
+        metrics: [
+          ["Platform", "Azure AKS + ACR"],
+          ["Delivery", "Terraform + GitHub Actions"],
+          ["Runtime", "FastAPI + PostgreSQL"],
+          ["Observability", "Prometheus + Grafana"],
+        ],
       proof:
         "Shows a realistic migration path from local application and database to Kubernetes, Azure infrastructure, CI/CD, and observability.",
+      highlights: [
+        "Containerized a legacy-style FastAPI application and introduced PostgreSQL with Docker Compose",
+        "Deployed the stack locally on Kubernetes with kind, Kustomize overlays, and PostgreSQL StatefulSet/PVC",
+        "Provisioned Azure Resource Group, ACR, AKS, and remote Terraform state with Terraform modules",
+        "Pushed application images to ACR and validated AKS deployment with kubelet AcrPull integration",
+        "Added GitHub Actions CI, Azure OIDC authentication check, and manual AKS deployment workflow",
+        "Deployed kube-prometheus-stack and exposed FastAPI custom metrics through /metrics and ServiceMonitor",
+      ],
       stack: sharedStacks.azureMigration,
       link: sharedProjectLinks.azureMigration,
     },
@@ -297,9 +309,7 @@ export const portfolioContent = {
       eyebrow: "Projets personnels",
       title: "Projets Cloud & DevOps concrets pour valider des patterns d'infrastructure réels",
       featuredLabel: "Projet principal",
-      featuredType: "Platform Engineering Lab",
       spotlightLabel: "Projet migration cloud",
-      spotlightType: "Azure Modernization Lab",
       scopeTitle: "Périmètre du projet",
       stackTitle: "Stack",
       featuredRepositoryLabel: "Voir le repository →",
@@ -403,8 +413,20 @@ export const portfolioContent = {
       title: "Azure Legacy App Migration",
       description:
         "Migration d'application vers Azure modernisant progressivement une application FastAPI legacy vers une plateforme cloud-native sur AKS avec PostgreSQL, Docker, Kustomize, Terraform, ACR, GitHub Actions OIDC et observability Prometheus/Grafana.",
+        metrics: [
+          ["Platform", "Azure AKS + ACR"],
+          ["Delivery", "Terraform + GitHub Actions"],
+          ["Runtime", "FastAPI + PostgreSQL"],
+          ["Observability", "Prometheus + Grafana"],
+        ],
       proof:
         "Montre une trajectoire réaliste de migration depuis une application et une base locale vers Kubernetes, l'infrastructure Azure, la CI/CD et l'observability.",
+        highlights: [
+        "Provisioning Azure Resource Group, ACR, AKS et remote Terraform state avec des modules Terraform",
+        "Push des images vers ACR et validation du déploiement AKS avec intégration AcrPull côté kubelet",
+        "Ajout d'une CI GitHub Actions, d'un check Azure OIDC et d'un workflow manuel de déploiement AKS",
+        "Déploiement kube-prometheus-stack avec métriques FastAPI exposées via /metrics et ServiceMonitor",
+      ],
       stack: sharedStacks.azureMigration,
       link: sharedProjectLinks.azureMigration,
     },

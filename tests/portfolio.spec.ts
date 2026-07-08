@@ -1,4 +1,3 @@
-
 import { expect, test } from "@playwright/test";
 
 const externalLinks = {
@@ -6,6 +5,7 @@ const externalLinks = {
   linkedin: "https://www.linkedin.com/in/merakchi",
   cv: "/Badis-Merakchi-CV.pdf",
   featuredRepository: "https://github.com/Badis-M/aws-eks-platform-golden-path",
+  azureMigration: "https://github.com/Badis-M/azure-legacy-app-migration-lab",
   awsEphemeralWebPlatform: "https://github.com/Badis-M/aws-ephemeral-web-platform",
   awsEksLandingZone: "https://github.com/Badis-M/aws-eks-landing-zone",
   pokedexLive: "https://pokedex.badismerakchi.com/",
@@ -40,6 +40,7 @@ test.describe("Portfolio", () => {
   });
 
   test("English page section navigation targets the expected anchors", async ({ page }) => {
+    await page.setViewportSize({ width: 1600, height: 900 });
     await page.goto("/");
 
     await page.getByRole("link", { name: "Skills" }).click();
@@ -56,6 +57,7 @@ test.describe("Portfolio", () => {
   });
 
   test("French page section navigation targets the expected anchors", async ({ page }) => {
+    await page.setViewportSize({ width: 1600, height: 900 });
     await page.goto("/fr");
 
     await page.getByRole("link", { name: "Compétences" }).click();
@@ -75,6 +77,7 @@ test.describe("Portfolio", () => {
     await page.goto("/");
 
     await expect(page.locator(`a[href="${externalLinks.featuredRepository}"]`)).toHaveText("View featured repository →");
+    await expect(page.locator(`a[href="${externalLinks.azureMigration}"]`)).toHaveText("View migration repository →");
     await expect(page.locator(`a[href="${externalLinks.awsEphemeralWebPlatform}"]`)).toHaveText("View repository →");
     await expect(page.locator(`a[href="${externalLinks.awsEksLandingZone}"]`)).toHaveText("View repository →");
     await expect(page.locator(`a[href="${externalLinks.pokedexLive}"]`)).toHaveText("View live site →");
@@ -86,7 +89,8 @@ test.describe("Portfolio", () => {
   test("French project buttons point to the expected URLs", async ({ page }) => {
     await page.goto("/fr");
 
-    await expect(page.locator(`a[href="${externalLinks.featuredRepository}"]`)).toHaveText("Voir le repository principal →");
+    await expect(page.locator(`a[href="${externalLinks.featuredRepository}"]`)).toHaveText("Voir le repository →");
+    await expect(page.locator(`a[href="${externalLinks.azureMigration}"]`)).toHaveText("Voir le repository →");
     await expect(page.locator(`a[href="${externalLinks.awsEphemeralWebPlatform}"]`)).toHaveText("Voir le repository →");
     await expect(page.locator(`a[href="${externalLinks.awsEksLandingZone}"]`)).toHaveText("Voir le repository →");
     await expect(page.locator(`a[href="${externalLinks.pokedexLive}"]`)).toHaveText("Voir le site live →");
