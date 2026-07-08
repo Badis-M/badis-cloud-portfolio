@@ -20,6 +20,21 @@ const sharedStacks = {
     "Prometheus",
     "Grafana",
   ],
+  azureMigration: [
+    "Azure",
+    "AKS",
+    "ACR",
+    "Terraform",
+    "Kubernetes",
+    "Kustomize",
+    "Docker",
+    "FastAPI",
+    "PostgreSQL",
+    "GitHub Actions",
+    "OIDC",
+    "Prometheus",
+    "Grafana",
+  ],
   ephemeralWeb: ["AWS", "Terraform", "Ansible", "Docker", "SSM", "EC2", "VPC", "IAM", "Nginx", "GitHub Actions"],
   eksLandingZone: ["AWS", "Amazon EKS", "Terraform", "Kubernetes", "Helm", "Metrics Server", "Amazon ECR", "AWS Load Balancer"],
   pokedex: ["Node.js", "Docker", "Terraform", "Ansible", "AWS", "Caddy", "OVH DNS"],
@@ -28,6 +43,7 @@ const sharedStacks = {
 
 const sharedProjectLinks = {
   featured: "https://github.com/Badis-M/aws-eks-platform-golden-path",
+  azureMigration: "https://github.com/Badis-M/azure-legacy-app-migration-lab",
   ephemeralWeb: "https://github.com/Badis-M/aws-ephemeral-web-platform",
   eksLandingZone: "https://github.com/Badis-M/aws-eks-landing-zone",
   pokedex: "https://github.com/Badis-M/pokedex-devops-deployment-lab",
@@ -87,9 +103,12 @@ export const portfolioContent = {
       title: "Hands-on Cloud & DevOps projects built to validate real infrastructure patterns",
       featuredLabel: "Featured project",
       featuredType: "Platform Engineering Lab",
+      spotlightLabel: "Cloud migration spotlight",
+      spotlightType: "Azure App Migration",
       scopeTitle: "Project scope",
       stackTitle: "Stack",
       featuredRepositoryLabel: "View featured repository →",
+      spotlightRepositoryLabel: "View featured repository →",
       otherEyebrow: "Other personal projects",
       otherTitle: "Additional labs covering AWS automation, observability, and application delivery",
       liveSiteLabel: "View live site →",
@@ -185,6 +204,16 @@ export const portfolioContent = {
       link: sharedProjectLinks.featured,
     },
 
+    spotlightProject: {
+      title: "Azure Legacy App Migration",
+      description:
+        "Progressive Azure migration modernizing a legacy-style FastAPI application into a cloud-native AKS platform with PostgreSQL, Docker, Kustomize, Terraform, ACR, GitHub Actions OIDC, and Prometheus/Grafana observability.",
+      proof:
+        "Shows a realistic migration path from local application and database to Kubernetes, Azure infrastructure, CI/CD, and observability.",
+      stack: sharedStacks.azureMigration,
+      link: sharedProjectLinks.azureMigration,
+    },
+
     projects: [
       {
         title: "AWS Ephemeral Web Platform",
@@ -269,9 +298,12 @@ export const portfolioContent = {
       title: "Projets Cloud & DevOps concrets pour valider des patterns d'infrastructure réels",
       featuredLabel: "Projet principal",
       featuredType: "Platform Engineering Lab",
+      spotlightLabel: "Projet migration cloud",
+      spotlightType: "Azure Modernization Lab",
       scopeTitle: "Périmètre du projet",
       stackTitle: "Stack",
-      featuredRepositoryLabel: "Voir le repository principal →",
+      featuredRepositoryLabel: "Voir le repository →",
+      spotlightRepositoryLabel: "Voir le repository →",
       otherEyebrow: "Autres projets personnels",
       otherTitle: "Labs complémentaires autour de l'automatisation AWS, de l'observability et de l'application delivery",
       liveSiteLabel: "Voir le site live →",
@@ -365,6 +397,16 @@ export const portfolioContent = {
       ],
       stack: sharedStacks.featured,
       link: sharedProjectLinks.featured,
+    },
+
+    spotlightProject: {
+      title: "Azure Legacy App Migration",
+      description:
+        "Migration d'application vers Azure modernisant progressivement une application FastAPI legacy vers une plateforme cloud-native sur AKS avec PostgreSQL, Docker, Kustomize, Terraform, ACR, GitHub Actions OIDC et observability Prometheus/Grafana.",
+      proof:
+        "Montre une trajectoire réaliste de migration depuis une application et une base locale vers Kubernetes, l'infrastructure Azure, la CI/CD et l'observability.",
+      stack: sharedStacks.azureMigration,
+      link: sharedProjectLinks.azureMigration,
     },
 
     projects: [

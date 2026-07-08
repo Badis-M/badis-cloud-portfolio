@@ -197,6 +197,32 @@ const page = (Astro.props.content ?? portfolioContent.en) as PortfolioContent;
           </div>
         </article>
 
+        <article class="spotlight-project-card">
+          <div class="spotlight-copy">
+            <div class="featured-topline">
+              <p class="featured-label">{page.projectsSection.spotlightLabel}</p>
+              <span>{page.projectsSection.spotlightType}</span>
+            </div>
+
+            <h3>{page.spotlightProject.title}</h3>
+            <p>{page.spotlightProject.description}</p>
+            <p class="featured-proof">{page.spotlightProject.proof}</p>
+          </div>
+
+          <div class="spotlight-meta">
+            <div>
+              <h4>{page.projectsSection.stackTitle}</h4>
+              <div class="tags">
+                {page.spotlightProject.stack.map((item) => <span>{item}</span>)}
+              </div>
+            </div>
+
+            <a href={page.spotlightProject.link} target="_blank" rel="noopener noreferrer">
+              {page.projectsSection.spotlightRepositoryLabel}
+            </a>
+          </div>
+        </article>
+
         <div class="project-subhead-card">
           <div>
             <p>{page.projectsSection.otherEyebrow}</p>
