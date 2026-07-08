@@ -77,7 +77,7 @@ test.describe("Portfolio", () => {
     await page.goto("/");
 
     await expect(page.locator(`a[href="${externalLinks.featuredRepository}"]`)).toHaveText("View featured repository →");
-    await expect(page.locator(`a[href="${externalLinks.azureMigration}"]`)).toHaveText("View migration repository →");
+    await expect(page.locator(`a[href="${externalLinks.azureMigration}"]`)).toHaveText("View featured repository →");
     await expect(page.locator(`a[href="${externalLinks.awsEphemeralWebPlatform}"]`)).toHaveText("View repository →");
     await expect(page.locator(`a[href="${externalLinks.awsEksLandingZone}"]`)).toHaveText("View repository →");
     await expect(page.locator(`a[href="${externalLinks.pokedexLive}"]`)).toHaveText("View live site →");
