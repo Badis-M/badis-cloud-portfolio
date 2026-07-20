@@ -28,3 +28,6 @@ pnpm-debug.log*
 test-results/
 playwright-report/
 blob-report/
+# Local Codex context
+/AGENTS.md
+/docs/PROJECT_CONTEXT.md
