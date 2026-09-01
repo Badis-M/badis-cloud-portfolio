@@ -8,12 +8,12 @@ The website presents my technical skills, consulting experience, selected person
 
 - Astro
 - HTML / CSS
-- GitHub Pages
+- Cloudflare Workers Static Assets
 - Custom domain
 
 ## Website
 
-https://badismerakchi.com
+https://portfolio.badismerakchi.com/
 
 ## Purpose
 

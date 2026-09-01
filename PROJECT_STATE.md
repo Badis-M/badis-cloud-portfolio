@@ -27,9 +27,10 @@ Visual reference: <https://consulting.badismerakchi.com/>
 - Centralized bilingual copy and project data in `src/data/portfolioContent.ts`.
 - Playwright `^1.61.0` end-to-end tests in `tests/portfolio.spec.ts`.
 - Public CV and favicon assets in `public/`.
-- GitHub Pages deployment through `.github/workflows/deploy.yml` on pushes to `main` or manual dispatch.
+- GitHub is the source code repository only; it no longer hosts or deploys the production site.
 - GitHub Actions CI through `.github/workflows/portfolio-ci.yml`: dependency installation, Astro build, Chromium installation, and Playwright tests.
-- Cloudflare Workers Static Assets deployment uses the root `wrangler.jsonc` configuration and publishes the Astro build output from `./dist` after `npm run build`.
+- Cloudflare Workers Static Assets is the production deployment target. Cloudflare builds and deploys from the GitHub repository on push, using the root `wrangler.jsonc` configuration to publish the Astro build output from `./dist` after `npm run build`.
+- The custom domain `portfolio.badismerakchi.com` is served by Cloudflare.
 - The explicit Wrangler configuration is required so `npx wrangler deploy` treats the project as a static asset site and does not attempt the interactive `astro add cloudflare` setup in CI.
 - Node.js requirement: `>=22.12.0`.
 
@@ -118,7 +119,7 @@ The future refactor should keep the portfolio as a technical evidence site with 
 - Do not add dependencies without approval.
 - Keep future changes small, reviewable, testable, and reversible.
 - Do not modify deployment configuration without approval.
-- Preserve static GitHub Pages compatibility.
+- Preserve static Cloudflare Workers Static Assets compatibility and keep GitHub as the source code repository only.
 - Respect existing accessible names and links or update Playwright coverage alongside intentional label changes.
 - Validate shared changes on both `/` and `/fr` and across mobile, tablet, and desktop widths.
 - Maintain visible focus, keyboard navigation, reduced-motion behavior, semantic headings, contrast, and touch target quality.
