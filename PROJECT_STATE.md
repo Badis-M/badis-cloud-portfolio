@@ -29,6 +29,8 @@ Visual reference: <https://consulting.badismerakchi.com/>
 - Public CV and favicon assets in `public/`.
 - GitHub Pages deployment through `.github/workflows/deploy.yml` on pushes to `main` or manual dispatch.
 - GitHub Actions CI through `.github/workflows/portfolio-ci.yml`: dependency installation, Astro build, Chromium installation, and Playwright tests.
+- Cloudflare Workers Static Assets deployment uses the root `wrangler.jsonc` configuration and publishes the Astro build output from `./dist` after `npm run build`.
+- The explicit Wrangler configuration is required so `npx wrangler deploy` treats the project as a static asset site and does not attempt the interactive `astro add cloudflare` setup in CI.
 - Node.js requirement: `>=22.12.0`.
 
 ## Current pages, components, and styles
