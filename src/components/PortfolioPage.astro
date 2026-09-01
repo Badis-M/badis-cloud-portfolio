@@ -17,36 +17,48 @@ const page = (Astro.props.content ?? portfolioContent.en) as PortfolioContent;
   </head>
 
   <body>
-    <main class="page">
-      <header class="header">
-        <a class="logo" href="/">Badis Merakchi</a>
+    <a class="skip-link" href="#main-content">
+      {page.lang === "fr" ? "Aller au contenu principal" : "Skip to main content"}
+    </a>
+
+    <header class="site-header">
+      <div class="header page">
+        <a
+          class="logo"
+          href={page.lang === "fr" ? "/fr" : "/"}
+          aria-label={page.lang === "fr" ? "Badis Merakchi — Accueil" : "Badis Merakchi — Home"}
+        >
+          <span class="logo-mark" aria-hidden="true">BM</span>
+          <span class="logo-name">Badis Merakchi</span>
+        </a>
+
+        <nav class="main-nav" aria-label={page.lang === "fr" ? "Navigation principale" : "Main navigation"}>
+          <a href="#skills">{page.nav.skills}</a>
+          <a href="#experience">{page.nav.experience}</a>
+          <a href="#projects">{page.nav.projects}</a>
+          <a href="#contact">{page.nav.contact}</a>
+          <a href={portfolioLinks.cv}>CV</a>
+        </nav>
+
         <div class="header-actions">
+          <a
+            class="consulting-link"
+            href="https://consulting.badismerakchi.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Consulting ↗
+          </a>
+
           <div class="language-switch" aria-label={page.languageLabel}>
-            <a class:list={[page.lang === "en" && "active"]} href="/">EN</a>
-            <a class:list={[page.lang === "fr" && "active"]} href="/fr">FR</a>
+            <a class:list={[page.lang === "en" && "active"]} href="/" aria-current={page.lang === "en" ? "page" : undefined}>EN</a>
+            <a class:list={[page.lang === "fr" && "active"]} href="/fr" aria-current={page.lang === "fr" ? "page" : undefined}>FR</a>
           </div>
         </div>
-      </header>
+      </div>
+    </header>
 
-      <aside class="side-nav" aria-label={page.lang === "fr" ? "Navigation des sections" : "Section navigation"}>
-        <a class="active" href="#skills" data-section="skills">
-          <span></span>
-          {page.nav.skills}
-        </a>
-        <a href="#experience" data-section="experience">
-          <span></span>
-          {page.nav.experience}
-        </a>
-        <a href="#projects" data-section="projects">
-          <span></span>
-          {page.nav.projects}
-        </a>
-        <a href="#contact" data-section="contact">
-          <span></span>
-          {page.nav.contact}
-        </a>
-      </aside>
-
+    <main id="main-content" class="page">
       <section class="hero">
         <div class="hero-copy">
           <p class="status">{page.hero.status}</p>
@@ -299,50 +311,5 @@ const page = (Astro.props.content ?? portfolioContent.en) as PortfolioContent;
         <p>{page.footer}</p>
       </footer>
     </main>
-
-    <script>
-      const sideNavLinks = Array.from(
-        document.querySelectorAll<HTMLAnchorElement>('.side-nav a')
-      );
-
-      const trackedSections = sideNavLinks
-        .map((link) => {
-          const sectionId = link.dataset.section;
-          return sectionId ? document.getElementById(sectionId) : null;
-        })
-        .filter((section): section is HTMLElement => section !== null);
-
-      const setActiveSection = (sectionId: string) => {
-        sideNavLinks.forEach((link) => {
-          link.classList.toggle('active', link.dataset.section === sectionId);
-        });
-      };
-
-      const updateActiveSection = () => {
-        const scrollBottom = window.innerHeight + window.scrollY;
-        const documentHeight = document.documentElement.scrollHeight;
-
-        if (documentHeight - scrollBottom < 120) {
-          setActiveSection('contact');
-          return;
-        }
-
-        const referencePoint = window.innerHeight * 0.42;
-        const currentSection = trackedSections
-          .map((section) => ({
-            id: section.id,
-            distance: Math.abs(section.getBoundingClientRect().top - referencePoint),
-          }))
-          .sort((a, b) => a.distance - b.distance)[0];
-
-        if (currentSection?.id) {
-          setActiveSection(currentSection.id);
-        }
-      };
-
-      updateActiveSection();
-      window.addEventListener('scroll', updateActiveSection, { passive: true });
-      window.addEventListener('resize', updateActiveSection);
-    </script>
   </body>
 </html>
