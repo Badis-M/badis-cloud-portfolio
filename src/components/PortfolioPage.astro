@@ -5,6 +5,22 @@ import { portfolioContent, portfolioLinks } from "../data/portfolioContent";
 type PortfolioContent = (typeof portfolioContent)[keyof typeof portfolioContent];
 
 const page = (Astro.props.content ?? portfolioContent.en) as PortfolioContent;
+
+const heroUi = page.lang === "fr"
+  ? {
+      portfolioLabel: "Portfolio technique de Badis Merakchi",
+      projectsButton: "Voir mes projets",
+      profileLinksLabel: "Profils professionnels",
+      credibilityLabel: "Compétences techniques clés",
+      credibilityChips: ["Terraform", "AWS · Azure · OCI", "CI/CD", "Kubernetes", "Linux"],
+    }
+  : {
+      portfolioLabel: "Badis Merakchi's technical portfolio",
+      projectsButton: "View my projects",
+      profileLinksLabel: "Professional profiles",
+      credibilityLabel: "Core technical skills",
+      credibilityChips: ["Terraform", "AWS · Azure · OCI", "CI/CD", "Kubernetes", "Linux"],
+    };
 ---
 
 <html lang={page.lang}>
@@ -59,40 +75,36 @@ const page = (Astro.props.content ?? portfolioContent.en) as PortfolioContent;
     </header>
 
     <main id="main-content" class="page">
-      <section class="hero">
+      <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="status">{page.hero.status}</p>
+          <p class="hero-context">{page.hero.status}</p>
 
-          <h1>{page.hero.title}</h1>
+          <p class="hero-kicker">{heroUi.portfolioLabel}</p>
+
+          <h1 id="hero-title">{page.hero.title}</h1>
 
           <p class="lead">{page.hero.lead}</p>
 
           <div class="actions">
-            <a class="button primary" href={portfolioLinks.cv}>{page.hero.cvButton}</a>
-            <a class="button secondary" href={portfolioLinks.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-            <a class="button secondary" href={portfolioLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-          </div>
-        </div>
-
-        <aside class="profile-card">
-          <div class="card-header">
-            <span></span>
-            <span></span>
-            <span></span>
+            <a class="button primary" href="#projects">{heroUi.projectsButton}</a>
+            <a class="button secondary" href={portfolioLinks.cv}>{page.hero.cvButton}</a>
           </div>
 
-          <div class="availability-badge">
-            <span></span>
+          <div class="hero-tertiary-links" aria-label={heroUi.profileLinksLabel}>
+            <a href={portfolioLinks.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a href={portfolioLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a href="https://consulting.badismerakchi.com/" target="_blank" rel="noreferrer">Consulting ↗</a>
+          </div>
+
+          <ul class="credibility-chips" aria-label={heroUi.credibilityLabel}>
+            {heroUi.credibilityChips.map((chip) => <li>{chip}</li>)}
+          </ul>
+
+          <p class="hero-availability">
+            <span aria-hidden="true"></span>
             {page.hero.availability}
-          </div>
-
-          {page.hero.metrics.map(([label, value]) => (
-            <div class="metric">
-              <p>{label}</p>
-              <strong>{value}</strong>
-            </div>
-          ))}
-        </aside>
+          </p>
+        </div>
       </section>
 
       <section id="skills" class="section">
