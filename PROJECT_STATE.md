@@ -32,6 +32,7 @@ Visual reference: <https://consulting.badismerakchi.com/>
 - Cloudflare Workers Static Assets is the production deployment target. Cloudflare builds and deploys from the GitHub repository on push, using the root `wrangler.jsonc` configuration to publish the Astro build output from `./dist` after `npm run build`.
 - The custom domain `portfolio.badismerakchi.com` is served by Cloudflare.
 - The explicit Wrangler configuration is required so `npx wrangler deploy` treats the project as a static asset site and does not attempt the interactive `astro add cloudflare` setup in CI.
+- `public/_headers` applies security headers to all static routes after Astro copies it to `dist/_headers`. The initial policy keeps inline scripts and styles compatible, excludes cross-origin isolation, and starts HSTS at `max-age=86400` without preload.
 - Node.js requirement: `>=22.12.0`.
 
 ## Current pages, components, and styles
