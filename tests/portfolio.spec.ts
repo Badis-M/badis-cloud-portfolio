@@ -49,7 +49,7 @@ test.describe("Portfolio", () => {
     await page.getByRole("link", { name: "Experience" }).click();
     await expect(page).toHaveURL(/#experience/);
 
-    await page.getByRole("link", { name: "Projects" }).click();
+    await page.getByRole("link", { name: "Projects", exact: true }).click();
     await expect(page).toHaveURL(/#projects/);
 
     await page.getByRole("link", { name: "Contact" }).click();
@@ -66,7 +66,7 @@ test.describe("Portfolio", () => {
     await page.getByRole("link", { name: "Expérience" }).click();
     await expect(page).toHaveURL(/#experience/);
 
-    await page.getByRole("link", { name: "Projets" }).click();
+    await page.getByRole("link", { name: "Projets", exact: true }).click();
     await expect(page).toHaveURL(/#projects/);
 
     await page.getByRole("link", { name: "Contact" }).click();
