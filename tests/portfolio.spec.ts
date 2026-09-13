@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 const externalLinks = {
   github: "https://github.com/Badis-M",
   linkedin: "https://www.linkedin.com/in/merakchi",
-  cv: "/Badis-Merakchi-CV.pdf",
+  cv: "/Badis_CV_Cloud_DevOps_Engineer.pdf",
   featuredRepository: "https://github.com/Badis-M/aws-eks-platform-golden-path",
   azureMigration: "https://github.com/Badis-M/azure-legacy-app-migration-lab",
   awsEphemeralWebPlatform: "https://github.com/Badis-M/aws-ephemeral-web-platform",
