@@ -1,5 +1,5 @@
 export const portfolioLinks = {
-  cv: "/Badis-Merakchi-CV.pdf",
+  cv: "/Badis_CV_Cloud_DevOps_Engineer.pdf",
   github: "https://github.com/Badis-M",
   linkedin: "https://www.linkedin.com/in/merakchi",
   email: "badis.merakchi@gmail.com",
