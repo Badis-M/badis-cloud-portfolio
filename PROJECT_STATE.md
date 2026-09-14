@@ -130,4 +130,4 @@ The future refactor should keep the portfolio as a technical evidence site with 
 - Consulting site: not currently present in the portfolio codebase.
 - GitHub: <https://github.com/Badis-M>
 - LinkedIn: <https://www.linkedin.com/in/merakchi>
-- CV: `/Badis-Merakchi-CV.pdf`
+- CV: `/Badis_CV_Cloud_DevOps_Engineer.pdf`
