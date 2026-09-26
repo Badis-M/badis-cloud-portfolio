@@ -2,6 +2,7 @@ export const portfolioLinks = {
   cv: "/Badis_CV_Cloud_DevOps_Engineer.pdf",
   github: "https://github.com/Badis-M",
   linkedin: "https://www.linkedin.com/in/merakchi",
+  consulting: "https://consulting.badismerakchi.com/",
   email: "badis.merakchi@gmail.com",
 };
 
@@ -53,9 +54,9 @@ const sharedProjectLinks = {
 export const portfolioContent = {
   en: {
     lang: "en",
-    title: "Badis Merakchi | Cloud & DevOps Engineer",
+    title: "Badis Merakchi | Cloud & DevOps Engineer in Geneva",
     description:
-      "Badis Merakchi — Cloud & DevOps Engineer focused on automation, Infrastructure as Code, cloud security, and cost-aware infrastructure delivery.",
+      "Cloud & DevOps Engineer near Geneva with 8+ years in IT. Portfolio covering AWS, Azure, OCI, Terraform, Kubernetes, CI/CD, and Swiss client delivery.",
 
     nav: {
       skills: "Skills",
@@ -313,9 +314,9 @@ export const portfolioContent = {
 
   fr: {
     lang: "fr",
-    title: "Badis Merakchi | Cloud & DevOps Engineer",
+    title: "Badis Merakchi | Ingénieur Cloud & DevOps à Genève",
     description:
-      "Badis Merakchi — Cloud & DevOps Engineer spécialisé en automatisation, Infrastructure as Code, sécurité cloud et delivery d'infrastructures maîtrisées côté coûts.",
+      "Ingénieur Cloud & DevOps près de Genève avec plus de 8 ans dans l'IT. Portfolio : AWS, Azure, OCI, Terraform, Kubernetes, CI/CD et clients suisses.",
 
     nav: {
       skills: "Compétences",

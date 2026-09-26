@@ -7,6 +7,31 @@ type PortfolioContent = (typeof portfolioContent)[keyof typeof portfolioContent]
 const page = (Astro.props.content ?? portfolioContent.en) as PortfolioContent;
 const [featuredClientEngagement, ...otherClientEngagements] = page.clientEngagements;
 
+const siteUrl = Astro.site ?? new URL("https://portfolio.badismerakchi.com");
+const canonicalPath = page.lang === "fr" ? "/fr/" : "/";
+const canonicalUrl = new URL(canonicalPath, siteUrl).href;
+const englishUrl = new URL("/", siteUrl).href;
+const frenchUrl = new URL("/fr/", siteUrl).href;
+const socialImageUrl = new URL("/og-portfolio.png", siteUrl).href;
+const socialImageAlt = page.lang === "fr"
+  ? "Badis Merakchi — Ingénieur Cloud & DevOps"
+  : "Badis Merakchi — Cloud & DevOps Engineer";
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Badis Merakchi",
+  url: englishUrl,
+  image: socialImageUrl,
+  jobTitle: page.lang === "fr" ? "Ingénieur Cloud & DevOps" : "Cloud & DevOps Engineer",
+  description: page.description,
+  workLocation: {
+    "@type": "Place",
+    name: page.lang === "fr" ? "Région de Genève, Suisse" : "Geneva area, Switzerland",
+  },
+  sameAs: [portfolioLinks.github, portfolioLinks.linkedin, portfolioLinks.consulting],
+  mainEntityOfPage: canonicalUrl,
+};
+
 const heroUi = page.lang === "fr"
   ? {
       portfolioLabel: "Portfolio technique de Badis Merakchi",
@@ -30,7 +55,35 @@ const heroUi = page.lang === "fr"
     <meta name="viewport" content="width=device-width" />
     <title>{page.title}</title>
     <meta name="description" content={page.description} />
+    <meta name="author" content="Badis Merakchi" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={englishUrl} />
+    <link rel="alternate" hreflang="fr" href={frenchUrl} />
+    <link rel="alternate" hreflang="x-default" href={englishUrl} />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Badis Merakchi — Technical Portfolio" />
+    <meta property="og:title" content={page.title} />
+    <meta property="og:description" content={page.description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content={page.lang === "fr" ? "fr_CH" : "en_CH"} />
+    <meta property="og:locale:alternate" content={page.lang === "fr" ? "en_CH" : "fr_CH"} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={socialImageAlt} />
+    <meta property="profile:first_name" content="Badis" />
+    <meta property="profile:last_name" content="Merakchi" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={page.title} />
+    <meta name="twitter:description" content={page.description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="twitter:image:alt" content={socialImageAlt} />
+
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
 
   <body>
@@ -60,7 +113,7 @@ const heroUi = page.lang === "fr"
         <div class="header-actions">
           <a
             class="consulting-link"
-            href="https://consulting.badismerakchi.com/"
+            href={portfolioLinks.consulting}
             target="_blank"
             rel="noreferrer"
           >
@@ -94,7 +147,7 @@ const heroUi = page.lang === "fr"
           <div class="hero-tertiary-links" aria-label={heroUi.profileLinksLabel}>
             <a href={portfolioLinks.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
             <a href={portfolioLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-            <a href="https://consulting.badismerakchi.com/" target="_blank" rel="noreferrer">Consulting ↗</a>
+            <a href={portfolioLinks.consulting} target="_blank" rel="noreferrer">Consulting ↗</a>
           </div>
 
           <ul class="credibility-chips" aria-label={heroUi.credibilityLabel}>

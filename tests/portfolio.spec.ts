@@ -1,8 +1,10 @@
 import { expect, test } from "@playwright/test";
 
 const externalLinks = {
+  site: "https://portfolio.badismerakchi.com",
   github: "https://github.com/Badis-M",
   linkedin: "https://www.linkedin.com/in/merakchi",
+  consulting: "https://consulting.badismerakchi.com/",
   cv: "/Badis_CV_Cloud_DevOps_Engineer.pdf",
   featuredRepository: "https://github.com/Badis-M/aws-eks-platform-golden-path",
   azureMigration: "https://github.com/Badis-M/azure-legacy-app-migration-lab",
@@ -37,6 +39,40 @@ test.describe("Portfolio", () => {
     await expect(page.getByRole("link", { name: "Télécharger le CV" })).toHaveAttribute("href", externalLinks.cv);
     await expect(page.getByRole("link", { name: "GitHub ↗" }).first()).toHaveAttribute("href", externalLinks.github);
     await expect(page.getByRole("link", { name: "LinkedIn ↗" }).first()).toHaveAttribute("href", externalLinks.linkedin);
+  });
+
+  test("bilingual pages expose canonical, language, and social metadata", async ({ page }) => {
+    for (const languagePage of [
+      {
+        path: "/",
+        canonical: `${externalLinks.site}/`,
+        locale: "en_CH",
+        title: "Badis Merakchi | Cloud & DevOps Engineer in Geneva",
+      },
+      {
+        path: "/fr/",
+        canonical: `${externalLinks.site}/fr/`,
+        locale: "fr_CH",
+        title: "Badis Merakchi | Ingénieur Cloud & DevOps à Genève",
+      },
+    ]) {
+      await page.goto(languagePage.path);
+
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", languagePage.canonical);
+      await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveAttribute("href", `${externalLinks.site}/`);
+      await expect(page.locator('link[rel="alternate"][hreflang="fr"]')).toHaveAttribute("href", `${externalLinks.site}/fr/`);
+      await expect(page.locator('link[rel="alternate"][hreflang="x-default"]')).toHaveAttribute("href", `${externalLinks.site}/`);
+      await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", languagePage.title);
+      await expect(page.locator('meta[property="og:url"]')).toHaveAttribute("content", languagePage.canonical);
+      await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute("content", languagePage.locale);
+      await expect(page.locator('meta[property="og:image"]')).toHaveAttribute("content", `${externalLinks.site}/og-portfolio.png`);
+      await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute("content", "summary_large_image");
+
+      const schema = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent() ?? "{}");
+      expect(schema["@type"]).toBe("Person");
+      expect(schema.name).toBe("Badis Merakchi");
+      expect(schema.sameAs).toEqual([externalLinks.github, externalLinks.linkedin, externalLinks.consulting]);
+    }
   });
 
   test("English page presents professional delivery in one section", async ({ page }) => {
@@ -155,5 +191,20 @@ test.describe("Portfolio", () => {
 
     expect(response.ok()).toBeTruthy();
     expect(response.headers()["content-type"]).toContain("application/pdf");
+  });
+
+  test("SEO discovery files and social image are served", async ({ request }) => {
+    const [robots, sitemap, socialImage] = await Promise.all([
+      request.get("/robots.txt"),
+      request.get("/sitemap.xml"),
+      request.get("/og-portfolio.png"),
+    ]);
+
+    expect(robots.ok()).toBeTruthy();
+    expect(await robots.text()).toContain(`Sitemap: ${externalLinks.site}/sitemap.xml`);
+    expect(sitemap.ok()).toBeTruthy();
+    expect(await sitemap.text()).toContain(`${externalLinks.site}/fr/`);
+    expect(socialImage.ok()).toBeTruthy();
+    expect(socialImage.headers()["content-type"]).toContain("image/png");
   });
 });
