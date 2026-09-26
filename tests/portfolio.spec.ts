@@ -44,9 +44,10 @@ test.describe("Portfolio", () => {
 
     await expect(page.getByRole("heading", { name: "Oracle — Senior Cloud Consultant" })).toBeVisible();
     await expect(page.getByText("April 2022 – December 2025", { exact: false })).toBeVisible();
-    const clientList = page.locator(".client-list");
-    for (const client of ["Avaloq", "Rothschild", "Swissquote", "Corner Bank", "LEMO", "IEC"]) {
-      await expect(clientList).toContainText(client);
+    await expect(page.locator(".featured-client-engagement")).toContainText("Avaloq");
+    const clientEngagements = page.locator(".client-engagement-grid");
+    for (const client of ["Rothschild", "Swissquote", "Corner Bank", "LEMO", "IEC"]) {
+      await expect(clientEngagements).toContainText(client);
     }
 
     const professionalDelivery = page.locator("#skills");
@@ -61,6 +62,11 @@ test.describe("Portfolio", () => {
 
     await expect(page.getByRole("heading", { name: "Oracle — Senior Cloud Consultant" })).toBeVisible();
     await expect(page.getByText("Avril 2022 – Décembre 2025", { exact: false })).toBeVisible();
+    await expect(page.locator(".featured-client-engagement")).toContainText("Avaloq");
+    const clientEngagements = page.locator(".client-engagement-grid");
+    for (const client of ["Rothschild", "Swissquote", "Corner Bank", "LEMO", "IEC"]) {
+      await expect(clientEngagements).toContainText(client);
+    }
 
     const professionalDelivery = page.locator("#skills");
     await expect(professionalDelivery.getByRole("heading", { name: "Expérience professionnelle" })).toBeVisible();

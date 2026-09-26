@@ -5,6 +5,7 @@ import { portfolioContent, portfolioLinks } from "../data/portfolioContent";
 type PortfolioContent = (typeof portfolioContent)[keyof typeof portfolioContent];
 
 const page = (Astro.props.content ?? portfolioContent.en) as PortfolioContent;
+const [featuredClientEngagement, ...otherClientEngagements] = page.clientEngagements;
 
 const heroUi = page.lang === "fr"
   ? {
@@ -124,48 +125,59 @@ const heroUi = page.lang === "fr"
       </section>
 
       <section id="experience" class="section">
-        <div class="section-head">
-          <p>{page.experienceSection.eyebrow}</p>
-          <h2>{page.experienceSection.title}</h2>
+        <div class="section-head experience-section-head">
+          <div>
+            <p>{page.experienceSection.eyebrow}</p>
+            <h2>{page.experienceSection.title}</h2>
+          </div>
+          <div class="experience-meta">
+            <span>{page.experienceSection.oracleLocation}</span>
+            <span>{page.experienceSection.oraclePeriod}</span>
+          </div>
         </div>
 
         <article class="experience">
-          <div class="experience-header">
-            <div>
-              <h3>{page.experienceSection.oracleRole}</h3>
-              <span>{page.experienceSection.oracleLocation} · {page.experienceSection.oraclePeriod}</span>
-            </div>
+          <p class="experience-summary">{page.experienceSection.oracleDescription}</p>
 
-            <p>{page.experienceSection.oracleDescription}</p>
-          </div>
-
-          <div class="experience-clients">
-            <h4>{page.experienceSection.clientsTitle}</h4>
-            <div class="client-list">
-              {page.clientEnvironments.map((client) => <span>{client}</span>)}
+          <article class="featured-client-engagement">
+            <div class="featured-client-label">
+              <span>{page.experienceSection.featuredEngagementLabel}</span>
+              <strong>{featuredClientEngagement.client}</strong>
             </div>
-          </div>
+            <div class="featured-client-copy">
+              <h3>{featuredClientEngagement.title}</h3>
+              <ul>
+                {featuredClientEngagement.highlights.map((highlight) => <li>{highlight}</li>)}
+              </ul>
+            </div>
+          </article>
 
           <div class="experience-engagements">
             <h4>{page.experienceSection.engagementsTitle}</h4>
             <div class="client-engagement-grid">
-              {page.clientEngagements.map((engagement) => (
+              {otherClientEngagements.map((engagement) => (
                 <article class="client-engagement-card">
                   <span>{engagement.client}</span>
-                  <h3>{engagement.title}</h3>
-                  <ul>
-                    {engagement.highlights.map((highlight) => <li>{highlight}</li>)}
-                  </ul>
+                  <div class="client-engagement-copy">
+                    <h3>{engagement.title}</h3>
+                    <ul>
+                      {engagement.highlights.map((highlight) => <li>{highlight}</li>)}
+                    </ul>
+                  </div>
                 </article>
               ))}
             </div>
           </div>
 
+          <div class="experience-proof-strip" aria-label={page.experienceSection.proofSummaryLabel}>
+            {page.experienceSection.proofItems.map((item) => <span>{item}</span>)}
+          </div>
+
           <div class="cross-client-delivery">
             <h4>{page.experienceSection.crossClientTitle}</h4>
-            <div class="mission-list">
-              {page.crossClientDelivery.map((item) => <span>{item}</span>)}
-            </div>
+            <ul class="cross-client-list">
+              {page.crossClientDelivery.map((item) => <li>{item}</li>)}
+            </ul>
           </div>
         </article>
 

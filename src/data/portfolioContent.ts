@@ -5,8 +5,6 @@ export const portfolioLinks = {
   email: "badis.merakchi@gmail.com",
 };
 
-const sharedClientEnvironments = ["Avaloq", "Rothschild", "Swissquote", "Corner Bank", "LEMO", "IEC"] as const;
-
 const sharedStacks = {
   featured: [
     "AWS",
@@ -89,16 +87,17 @@ export const portfolioContent = {
     },
 
     experienceSection: {
-      eyebrow: "Experience",
-      title: "Cloud infrastructure delivery for Swiss organizations",
-      oracleRole: "Oracle — Senior Cloud Consultant",
+      eyebrow: "Professional experience",
+      title: "Oracle — Senior Cloud Consultant",
       oracleLocation: "Geneva, Switzerland",
       oraclePeriod: "April 2022 – December 2025",
       oracleDescription:
         "Cloud consulting and infrastructure delivery across Swiss banking, financial, industrial, and data-oriented environments. Professional work covered OCI, AWS, and Azure, including landing zones, Terraform, Ansible, CI/CD, Kubernetes, EKS, AKS, cloud security, FinOps, and operational readiness.",
-      clientsTitle: "Selected client environments",
-      engagementsTitle: "Selected Oracle client engagements",
+      featuredEngagementLabel: "Primary engagement",
+      engagementsTitle: "Other selected client engagements",
       crossClientTitle: "Cross-client delivery",
+      proofSummaryLabel: "Oracle experience summary",
+      proofItems: ["6 client environments", "OCI · AWS · Azure", "Banking · Industry · Data"],
     },
 
     projectsSection: {
@@ -148,8 +147,6 @@ export const portfolioContent = {
       ["Platform Patterns", "RBAC, NetworkPolicy, probes, resource limits, GitOps concepts"],
       ["Client Delivery", "Workshops, documentation, handover, go-live support"],
     ],
-
-    clientEnvironments: sharedClientEnvironments,
 
     clientEngagements: [
       {
@@ -350,16 +347,17 @@ export const portfolioContent = {
     },
 
     experienceSection: {
-      eyebrow: "Expérience",
-      title: "Delivery d'infrastructures cloud pour des organisations suisses",
-      oracleRole: "Oracle — Senior Cloud Consultant",
+      eyebrow: "Expérience professionnelle",
+      title: "Oracle — Senior Cloud Consultant",
       oracleLocation: "Genève, Suisse",
       oraclePeriod: "Avril 2022 – Décembre 2025",
       oracleDescription:
         "Cloud consulting et delivery d'infrastructures dans des environnements suisses bancaires, financiers, industriels et orientés data. L'expérience professionnelle couvre OCI, AWS et Azure, notamment les landing zones, Terraform, Ansible, la CI/CD, Kubernetes, EKS, AKS, la sécurité cloud, le FinOps et la préparation opérationnelle.",
-      clientsTitle: "Environnements clients",
-      engagementsTitle: "Missions clients Oracle sélectionnées",
+      featuredEngagementLabel: "Mission principale",
+      engagementsTitle: "Autres missions clients sélectionnées",
       crossClientTitle: "Delivery transverse",
+      proofSummaryLabel: "Synthèse de l'expérience Oracle",
+      proofItems: ["6 environnements clients", "OCI · AWS · Azure", "Banque · Industrie · Data"],
     },
 
     projectsSection: {
@@ -409,8 +407,6 @@ export const portfolioContent = {
       ["Platform Patterns", "RBAC, NetworkPolicy, probes, resource limits, concepts GitOps"],
       ["Client Delivery", "Workshops, documentation, handover, accompagnement go-live"],
     ],
-
-    clientEnvironments: sharedClientEnvironments,
 
     clientEngagements: [
       {

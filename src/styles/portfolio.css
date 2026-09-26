@@ -508,32 +508,87 @@
     padding: 28px;
   }
 
-  .experience-header {
+  .experience-section-head {
     display: grid;
-    grid-template-columns: 0.7fr 1.3fr;
-    gap: 32px;
-    margin-bottom: 30px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 36px;
+    align-items: end;
   }
 
-  .experience-header span {
+  .experience-meta {
+    display: grid;
+    gap: 4px;
+    padding-bottom: 4px;
+    text-align: right;
+  }
+
+  .experience-meta span {
     display: block;
-    margin-top: 8px;
     color: var(--color-text-muted);
     font-size: 14px;
   }
 
-  .experience-header p {
-    margin-bottom: 0;
+  .experience-summary {
+    max-width: 880px;
+    margin: 0 0 26px;
   }
 
-  .experience-clients,
-  .experience-engagements,
+  .featured-client-engagement {
+    display: grid;
+    grid-template-columns: minmax(150px, 0.55fr) minmax(0, 1.45fr);
+    gap: 30px;
+    padding: 26px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-card);
+    background:
+      radial-gradient(circle at 0 0, var(--color-accent-glow), transparent 18rem),
+      var(--color-surface-strong);
+  }
+
+  .featured-client-label span {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--color-accent-hover);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .featured-client-label strong {
+    display: block;
+    color: var(--color-text-primary);
+    font-size: clamp(28px, 3vw, 34px);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+  }
+
+  .featured-client-copy h3 {
+    margin-bottom: 14px;
+  }
+
+  .featured-client-copy ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 24px;
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .featured-client-copy li {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
   .cross-client-delivery {
     padding-top: 26px;
     border-top: 1px solid var(--border-subtle);
   }
 
-  .experience-engagements,
+  .experience-engagements {
+    margin-top: 26px;
+  }
+
   .cross-client-delivery {
     margin-top: 26px;
   }
@@ -545,13 +600,15 @@
   }
 
   .client-engagement-card {
-    padding: 18px 0;
-    border-top: 1px solid var(--border-subtle);
+    padding: 20px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-control);
+    background: var(--color-surface-muted);
   }
 
   .client-engagement-card > span {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     color: var(--color-accent-hover);
     font-size: 12px;
     font-weight: 900;
@@ -559,22 +616,38 @@
     text-transform: uppercase;
   }
 
-  .client-engagement-card h3 {
+  .client-engagement-copy h3 {
     margin-bottom: 14px;
     font-size: 17px;
   }
 
-  .client-engagement-card ul {
+  .client-engagement-copy ul {
     display: grid;
     gap: 8px;
     margin: 0;
     padding-left: 18px;
   }
 
-  .client-engagement-card li {
+  .client-engagement-copy li {
     color: var(--color-text-secondary);
     font-size: 14px;
     line-height: 1.55;
+  }
+
+  .experience-proof-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .experience-proof-strip span {
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-pill);
+    padding: 7px 10px;
+    color: var(--color-text-accent);
+    font-size: 12px;
+    background: var(--color-accent-soft);
   }
 
   .experience-columns {
@@ -910,8 +983,6 @@
   }
 
   .tags,
-  .client-list,
-  .mission-list,
   .compact-tags {
     display: flex;
     flex-wrap: wrap;
@@ -923,8 +994,6 @@
   }
 
   .tags span,
-  .client-list span,
-  .mission-list span,
   .compact-tags span {
     border: 1px solid var(--border-default);
     border-radius: var(--radius-pill);
@@ -934,14 +1003,32 @@
     background: var(--color-accent-soft);
   }
 
-  .client-list span {
-    border-color: var(--border-default);
-    color: var(--color-text-accent);
-    background: var(--color-accent-soft);
+  .cross-client-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .mission-list span {
-    border-radius: var(--radius-control);
+  .cross-client-list li {
+    position: relative;
+    padding: 12px 0 12px 18px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .cross-client-list li::before {
+    position: absolute;
+    top: 21px;
+    left: 2px;
+    width: 5px;
+    height: 5px;
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    content: "";
   }
 
   .compact-tags span {
@@ -1047,7 +1134,9 @@
     .featured-project-card,
     .spotlight-project-card,
     .projects-grid,
-    .experience-header,
+    .experience-section-head,
+    .featured-client-engagement,
+    .featured-client-copy ul,
     .experience-columns,
     .additional-experience-grid,
     .contact {
@@ -1132,6 +1221,15 @@
 
     .client-engagement-grid {
       grid-template-columns: 1fr;
+    }
+
+    .client-engagement-card,
+    .cross-client-list {
+      grid-template-columns: 1fr;
+    }
+
+    .experience-meta {
+      text-align: left;
     }
 
     .experience {
