@@ -5,7 +5,7 @@ export const portfolioLinks = {
   email: "badis.merakchi@gmail.com",
 };
 
-const sharedClientEnvironments = ["Rothschild", "Corner Bank", "Avaloq", "ISO", "LEMO", "CHUV", "IEC", "Keytrade"] as const;
+const sharedClientEnvironments = ["Avaloq", "Rothschild", "Swissquote", "Corner Bank", "LEMO", "IEC"] as const;
 
 const sharedStacks = {
   featured: [
@@ -37,7 +37,7 @@ const sharedStacks = {
   ],
   ephemeralWeb: ["AWS", "Terraform", "Ansible", "Docker", "SSM", "EC2", "VPC", "IAM", "Nginx", "GitHub Actions"],
   eksLandingZone: ["AWS", "Amazon EKS", "Terraform", "Kubernetes", "Helm", "Metrics Server", "Amazon ECR", "AWS Load Balancer"],
-  pokedex: ["Node.js", "Docker", "Terraform", "Ansible", "AWS", "Caddy", "OVH DNS"],
+  pokedex: ["Node.js", "Docker", "Terraform", "Ansible", "AWS", "Caddy", "Cloudflare Workers"],
   k8sVisualOps: ["Kubernetes", "kind", "Docker", "FastAPI", "kubectl", "Linux", "Networking"],
 } as const;
 
@@ -72,7 +72,7 @@ export const portfolioContent = {
       status: "Geneva - French Switzerland · Cloud / DevOps / Infrastructure",
       title: "Cloud & DevOps Engineer building secure, automated cloud platforms.",
       lead:
-        "Consultant focused on Infrastructure as Code, cloud security, CI/CD, automation, and cost-aware infrastructure delivery across OCI, AWS, and Azure.",
+        "IT professional with more than eight years of experience, including senior cloud consulting at Oracle Geneva for Swiss clients. Focused on Infrastructure as Code, automation, CI/CD, security, and operations across OCI, AWS, and Azure.",
       cvButton: "Download CV",
       availability: "Currently Available",
       metrics: [
@@ -85,30 +85,33 @@ export const portfolioContent = {
 
     skillsSection: {
       eyebrow: "Technical scope",
-      title: "Core skills",
+      title: "Professional delivery",
     },
 
     experienceSection: {
       eyebrow: "Experience",
-      title: "Cloud consulting across multiple client environments",
+      title: "Cloud infrastructure delivery for Swiss organizations",
+      oracleRole: "Oracle — Senior Cloud Consultant",
       oracleLocation: "Geneva, Switzerland",
+      oraclePeriod: "April 2022 – December 2025",
       oracleDescription:
-        "Cloud consulting and infrastructure delivery across multiple Swiss client environments, including banking, financial services, industrial, and data-oriented contexts. Work focused on cloud infrastructure, Infrastructure as Code with Terraform, automation, DevOps practices, FinOps, and operational support across OCI and multi-cloud environments, including AWS exposure.",
+        "Cloud consulting and infrastructure delivery across Swiss banking, financial, industrial, and data-oriented environments. Professional work covered OCI, AWS, and Azure, including landing zones, Terraform, Ansible, CI/CD, Kubernetes, EKS, AKS, cloud security, FinOps, and operational readiness.",
       clientsTitle: "Selected client environments",
-      missionsTitle: "Delivery areas",
+      engagementsTitle: "Selected Oracle client engagements",
+      crossClientTitle: "Cross-client delivery",
     },
 
     projectsSection: {
-      eyebrow: "Personal projects",
-      title: "Hands-on Cloud & DevOps projects built to validate real infrastructure patterns",
+      eyebrow: "Selected engineering projects",
+      title: "Cloud, DevOps, and Platform Engineering projects",
       featuredLabel: "Featured project",
       spotlightLabel: "Cloud migration spotlight",
       scopeTitle: "Project scope",
       stackTitle: "Stack",
       featuredRepositoryLabel: "View featured repository →",
       spotlightRepositoryLabel: "View featured repository →",
-      otherEyebrow: "Other personal projects",
-      otherTitle: "Additional labs covering AWS automation, observability, and application delivery",
+      otherEyebrow: "Other projects",
+      otherTitle: "Additional infrastructure automation and cloud-native delivery projects",
       liveSiteLabel: "View live site →",
       repositoryLabel: "View repository →",
     },
@@ -126,39 +129,90 @@ export const portfolioContent = {
       profilesLabel: "Profiles",
     },
 
-    footer: "© 2026 Badis Merakchi · Built with Astro · Deployed on GitHub Pages",
+    footer: "© 2026 Badis Merakchi · Built with Astro · Deployed on Cloudflare Workers",
 
     skills: [
       ["Cloud Platforms", "OCI, AWS, Azure"],
-      ["Infrastructure as Code", "Terraform"],
-      ["Automation", "Bash, GitHub Actions, CI/CD"],
-      ["Containers", "Docker, Kubernetes, EKS, Helm"],
-      ["Provisioning & Configuration", "Ansible, server provisioning, service configuration"],
-      ["Security", "IAM, SSO, cloud governance"],
-      ["Networking", "VPC, DNS, HTTPS, secure connectivity"],
-      ["Linux & Systems", "Linux administration, patching, troubleshooting"],
-      ["Databases", "MySQL, Oracle ATP, database migration support"],
-      ["Data Workflows", "ETL workflows, data handling, data processing"],
-      ["Operations", "Monitoring, auditing, incident support"],
-      ["Cost Control", "FinOps, cleanup automation, budget alerts"],
-      ["Client Delivery", "Workshops, stakeholder support, consulting"],
-      ["Developer Tooling", "Git, GitHub, VS Code, CLI workflows"],
-      ["Web Delivery", "Reverse proxy, HTTPS, DNS integration"],
+      ["Infrastructure as Code", "Terraform, reusable infrastructure patterns"],
+      ["Provisioning & Configuration", "Ansible, Bash, server configuration"],
+      ["CI/CD", "GitHub Actions, staged pipelines, controlled approvals"],
+      ["Kubernetes Platforms", "Kubernetes, Amazon EKS, Azure AKS"],
+      ["Kubernetes Tooling", "kind, Helm, Kustomize, kubectl"],
+      ["Security & Governance", "IAM, SSO, OCI Cloud Guard, access control"],
+      ["Networking", "VCN/VPC, subnets, DNS, HTTPS, secure connectivity"],
+      ["Linux & Operations", "Monitoring, patching, troubleshooting, production readiness"],
+      ["Database Migrations", "ExaCC migration support, scripts, database tuning"],
+      ["FinOps", "Consumption audits, right-sizing, cost optimization"],
+      ["Observability", "Prometheus, Grafana, ServiceMonitor"],
+      ["Containers & Applications", "Docker, FastAPI, Node.js, PostgreSQL"],
+      ["Platform Patterns", "RBAC, NetworkPolicy, probes, resource limits, GitOps concepts"],
+      ["Client Delivery", "Workshops, documentation, handover, go-live support"],
     ],
 
     clientEnvironments: sharedClientEnvironments,
 
-    missionAreas: [
-      "Cloud infrastructure delivery",
-      "Secure file transfer environments",
-      "Containerized environments",
-      "Kubernetes and Helm-based deployments",
-      "Database migration support",
-      "Terraform automation",
-      "ETL workflows and data processing",
-      "Infrastructure operations",
-      "IAM, SSO and governance",
-      "Documentation and stakeholder support",
+    clientEngagements: [
+      {
+        client: "Avaloq",
+        title: "Multi-cloud platforms and landing zones",
+        highlights: [
+          "AWS and OCI landing zones across development, staging, and production environments",
+          "Terraform provisioning and reusable infrastructure patterns",
+          "Ansible post-provisioning configuration",
+          "GitHub Actions pipelines with controlled approvals",
+          "Professional Kubernetes work with Amazon EKS and Azure AKS",
+          "IAM, networking, governance, and OCI Cloud Guard",
+        ],
+      },
+      {
+        client: "Rothschild",
+        title: "Secure SFTP infrastructure on OCI",
+        highlights: [
+          "OCI compute, VCN, subnets, and public/private addressing",
+          "Secure transfers with SSH keys, IAM, SSO, and audit mechanisms",
+        ],
+      },
+      {
+        client: "Swissquote",
+        title: "Exadata Cloud@Customer migration support",
+        highlights: [
+          "Database migration support and tuning",
+          "Delivery in a critical banking environment",
+        ],
+      },
+      {
+        client: "Corner Bank",
+        title: "Exadata Cloud@Customer migration support",
+        highlights: [
+          "Migration scripts and database tuning support",
+          "Delivery in a critical banking environment",
+        ],
+      },
+      {
+        client: "LEMO",
+        title: "OCI Landing Zone",
+        highlights: [
+          "Terraform, networking, IAM, and governance",
+          "Reproducible cloud foundation in an OCI migration context",
+        ],
+      },
+      {
+        client: "IEC",
+        title: "Data and analytics platform",
+        highlights: [
+          "ETL/ELT workflows with Oracle Autonomous Data Warehouse and Oracle Analytics Cloud",
+          "Data transfer, transformation, and analytical delivery",
+        ],
+      },
+    ],
+
+    crossClientDelivery: [
+      "Linux monitoring, troubleshooting, and quarterly security patching",
+      "Technical audits, quality assurance, and production readiness",
+      "Cloud governance, IAM, access control, and security reporting",
+      "FinOps consumption reviews, right-sizing, and cost optimization",
+      "Technical workshops, architecture discussions, and stakeholder coordination",
+      "Architecture documentation, runbooks, handover, and go-live support",
     ],
 
     additionalExperiences: [
@@ -181,7 +235,7 @@ export const portfolioContent = {
     featuredProject: {
       title: "AWS EKS Platform Golden Path",
       description:
-        "End-to-end Platform Engineering lab for provisioning, deploying, observing, validating, and destroying an ephemeral AWS EKS platform.",
+        "End-to-end Platform Engineering project for provisioning, deploying, observing, validating, and destroying an ephemeral AWS EKS platform.",
       metrics: [
         ["Platform", "AWS EKS"],
         ["Delivery", "Terraform + Helm"],
@@ -230,7 +284,7 @@ export const portfolioContent = {
       {
         title: "AWS Ephemeral Web Platform",
         description:
-          "Ephemeral AWS infrastructure lab for provisioning a secure web platform with Terraform, configuring services with Ansible, operating access through AWS Systems Manager, and validating a cost-aware create/destroy lifecycle.",
+          "Ephemeral AWS infrastructure project for provisioning a secure web platform with Terraform, configuring services with Ansible, operating access through AWS Systems Manager, and validating a cost-aware create/destroy lifecycle.",
         stack: sharedStacks.ephemeralWeb,
         link: sharedProjectLinks.ephemeralWeb,
       },
@@ -244,7 +298,7 @@ export const portfolioContent = {
       {
         title: "Pokédex DevOps Deployment Lab",
         description:
-          "Personal DevOps deployment lab taking a Node.js application through Docker, AWS infrastructure, HTTPS, DNS, Ansible, and CI.",
+          "DevOps delivery project taking a Node.js application through Docker, AWS infrastructure, HTTPS, DNS, Ansible, and CI.",
         stack: sharedStacks.pokedex,
         liveUrl: sharedProjectLinks.pokedexLive,
         link: sharedProjectLinks.pokedex,
@@ -252,7 +306,7 @@ export const portfolioContent = {
       {
         title: "Kubernetes Visual Ops Lab",
         description:
-          "Visual Kubernetes learning lab explaining core cluster concepts, the kubectl apply flow, and local deployment workflows with Docker, kind, and FastAPI.",
+          "Visual Kubernetes platform explaining core cluster concepts, the kubectl apply flow, and local deployment workflows with Docker, kind, and FastAPI.",
         stack: sharedStacks.k8sVisualOps,
         liveUrl: sharedProjectLinks.k8sVisualOpsLive,
         link: sharedProjectLinks.k8sVisualOps,
@@ -279,7 +333,7 @@ export const portfolioContent = {
       status: "Disponible en Suisse romande · Cloud / DevOps / Infrastructure",
       title: "Cloud & DevOps Engineer spécialisé dans les plateformes cloud sécurisées et automatisées.",
       lead:
-        "Consultant spécialisé en Infrastructure as Code, sécurité cloud, CI/CD, automatisation et delivery d'infrastructures maîtrisées côté coûts sur OCI, AWS et Azure.",
+        "Professionnel IT avec plus de huit ans d'expérience, dont une expérience de Senior Cloud Consultant chez Oracle à Genève pour des clients suisses. Spécialisé en Infrastructure as Code, automatisation, CI/CD, sécurité et opérations sur OCI, AWS et Azure.",
       cvButton: "Télécharger le CV",
       availability: "Disponible actuellement",
       metrics: [
@@ -292,30 +346,33 @@ export const portfolioContent = {
 
     skillsSection: {
       eyebrow: "Périmètre technique",
-      title: "Compétences clés",
+      title: "Expérience professionnelle",
     },
 
     experienceSection: {
       eyebrow: "Expérience",
-      title: "Cloud consulting dans plusieurs environnements clients",
+      title: "Delivery d'infrastructures cloud pour des organisations suisses",
+      oracleRole: "Oracle — Senior Cloud Consultant",
       oracleLocation: "Genève, Suisse",
+      oraclePeriod: "Avril 2022 – Décembre 2025",
       oracleDescription:
-        "Cloud consulting et delivery d'infrastructures auprès de plusieurs environnements clients suisses, notamment dans la banque, les services financiers, l'industrie et les contextes orientés data. Missions axées sur l'infrastructure cloud, l'Infrastructure as Code avec Terraform, l'automatisation, les pratiques DevOps, le FinOps et le support opérationnel sur OCI et des environnements multi-cloud, avec exposition AWS.",
+        "Cloud consulting et delivery d'infrastructures dans des environnements suisses bancaires, financiers, industriels et orientés data. L'expérience professionnelle couvre OCI, AWS et Azure, notamment les landing zones, Terraform, Ansible, la CI/CD, Kubernetes, EKS, AKS, la sécurité cloud, le FinOps et la préparation opérationnelle.",
       clientsTitle: "Environnements clients",
-      missionsTitle: "Domaines d'intervention",
+      engagementsTitle: "Missions clients Oracle sélectionnées",
+      crossClientTitle: "Delivery transverse",
     },
 
     projectsSection: {
-      eyebrow: "Projets personnels",
-      title: "Projets Cloud & DevOps concrets pour valider des patterns d'infrastructure réels",
+      eyebrow: "Projets d'ingénierie sélectionnés",
+      title: "Projets Cloud, DevOps et Platform Engineering",
       featuredLabel: "Projet principal",
       spotlightLabel: "Projet migration cloud",
       scopeTitle: "Périmètre du projet",
       stackTitle: "Stack",
       featuredRepositoryLabel: "Voir le repository →",
       spotlightRepositoryLabel: "Voir le repository →",
-      otherEyebrow: "Autres projets personnels",
-      otherTitle: "Labs complémentaires autour de l'automatisation AWS, de l'observability et de l'application delivery",
+      otherEyebrow: "Autres projets",
+      otherTitle: "Projets complémentaires d'automatisation d'infrastructure et de delivery cloud-native",
       liveSiteLabel: "Voir le site live →",
       repositoryLabel: "Voir le repository →",
     },
@@ -333,39 +390,90 @@ export const portfolioContent = {
       profilesLabel: "Profils",
     },
 
-    footer: "© 2026 Badis Merakchi · Built with Astro · Déployé sur GitHub Pages",
+    footer: "© 2026 Badis Merakchi · Built with Astro · Déployé sur Cloudflare Workers",
 
     skills: [
       ["Cloud Platforms", "OCI, AWS, Azure"],
-      ["Infrastructure as Code", "Terraform"],
-      ["Automation", "Bash, GitHub Actions, CI/CD"],
-      ["Containers", "Docker, Kubernetes, EKS, Helm"],
-      ["Provisioning & Configuration", "Ansible, provisioning serveur, configuration de services"],
-      ["Security", "IAM, SSO, gouvernance cloud"],
-      ["Networking", "VPC, DNS, HTTPS, connectivité sécurisée"],
-      ["Linux & Systems", "Administration Linux, patching, troubleshooting"],
-      ["Databases", "MySQL, Oracle ATP, support migration database"],
-      ["Data Workflows", "ETL workflows, data handling, data processing"],
-      ["Operations", "Monitoring, auditing, support incident"],
-      ["Cost Control", "FinOps, cleanup automation, budget alerts"],
-      ["Client Delivery", "Workshops, support stakeholders, consulting"],
-      ["Developer Tooling", "Git, GitHub, VS Code, CLI workflows"],
-      ["Web Delivery", "Reverse proxy, HTTPS, intégration DNS"],
+      ["Infrastructure as Code", "Terraform, patterns d'infrastructure réutilisables"],
+      ["Provisioning & Configuration", "Ansible, Bash, configuration serveur"],
+      ["CI/CD", "GitHub Actions, pipelines par environnement, approbations contrôlées"],
+      ["Kubernetes Platforms", "Kubernetes, Amazon EKS, Azure AKS"],
+      ["Kubernetes Tooling", "kind, Helm, Kustomize, kubectl"],
+      ["Security & Governance", "IAM, SSO, OCI Cloud Guard, contrôle d'accès"],
+      ["Networking", "VCN/VPC, subnets, DNS, HTTPS, connectivité sécurisée"],
+      ["Linux & Operations", "Monitoring, patching, troubleshooting, préparation à la production"],
+      ["Database Migrations", "Support migration ExaCC, scripts, database tuning"],
+      ["FinOps", "Audits de consommation, right-sizing, optimisation des coûts"],
+      ["Observability", "Prometheus, Grafana, ServiceMonitor"],
+      ["Containers & Applications", "Docker, FastAPI, Node.js, PostgreSQL"],
+      ["Platform Patterns", "RBAC, NetworkPolicy, probes, resource limits, concepts GitOps"],
+      ["Client Delivery", "Workshops, documentation, handover, accompagnement go-live"],
     ],
 
     clientEnvironments: sharedClientEnvironments,
 
-    missionAreas: [
-      "Delivery d'infrastructure cloud",
-      "Environnements de secure file transfer",
-      "Environnements containerisés",
-      "Déploiements Kubernetes et Helm",
-      "Support migration database",
-      "Automatisation Terraform",
-      "ETL workflows et data processing",
-      "Infrastructure operations",
-      "IAM, SSO et gouvernance",
-      "Documentation et support stakeholders",
+    clientEngagements: [
+      {
+        client: "Avaloq",
+        title: "Plateformes multi-cloud et landing zones",
+        highlights: [
+          "Landing zones AWS et OCI pour les environnements de développement, staging et production",
+          "Provisioning Terraform et patterns d'infrastructure réutilisables",
+          "Configuration post-provisioning avec Ansible",
+          "Pipelines GitHub Actions avec approbations contrôlées",
+          "Expérience professionnelle Kubernetes avec Amazon EKS et Azure AKS",
+          "IAM, networking, gouvernance et OCI Cloud Guard",
+        ],
+      },
+      {
+        client: "Rothschild",
+        title: "Infrastructure SFTP sécurisée sur OCI",
+        highlights: [
+          "OCI Compute, VCN, subnets et adressage public/privé",
+          "Transferts sécurisés avec clés SSH, IAM, SSO et mécanismes d'audit",
+        ],
+      },
+      {
+        client: "Swissquote",
+        title: "Support de migration Exadata Cloud@Customer",
+        highlights: [
+          "Support migration de bases de données et tuning",
+          "Delivery dans un environnement bancaire critique",
+        ],
+      },
+      {
+        client: "Corner Bank",
+        title: "Support de migration Exadata Cloud@Customer",
+        highlights: [
+          "Scripts de migration et support database tuning",
+          "Delivery dans un environnement bancaire critique",
+        ],
+      },
+      {
+        client: "LEMO",
+        title: "OCI Landing Zone",
+        highlights: [
+          "Terraform, networking, IAM et gouvernance",
+          "Fondation cloud reproductible dans un contexte de migration OCI",
+        ],
+      },
+      {
+        client: "IEC",
+        title: "Plateforme Data et Analytics",
+        highlights: [
+          "Workflows ETL/ELT avec Oracle Autonomous Data Warehouse et Oracle Analytics Cloud",
+          "Transfert, transformation et exploitation analytique des données",
+        ],
+      },
+    ],
+
+    crossClientDelivery: [
+      "Monitoring Linux, troubleshooting et security patching trimestriel",
+      "Audits techniques, quality assurance et préparation à la production",
+      "Gouvernance cloud, IAM, contrôle d'accès et reporting sécurité",
+      "Revues de consommation FinOps, right-sizing et optimisation des coûts",
+      "Workshops techniques, discussions d'architecture et coordination des parties prenantes",
+      "Documentation d'architecture, runbooks, handover et accompagnement go-live",
     ],
 
     additionalExperiences: [
@@ -388,7 +496,7 @@ export const portfolioContent = {
     featuredProject: {
       title: "AWS EKS Platform Golden Path",
       description:
-        "Lab Platform Engineering end-to-end pour provisionner, déployer, observer, valider et détruire une plateforme AWS EKS éphémère.",
+        "Projet Platform Engineering end-to-end pour provisionner, déployer, observer, valider et détruire une plateforme AWS EKS éphémère.",
       metrics: [
         ["Platform", "AWS EKS"],
         ["Delivery", "Terraform + Helm"],
@@ -435,7 +543,7 @@ export const portfolioContent = {
       {
         title: "AWS Ephemeral Web Platform",
         description:
-          "Lab d'infrastructure AWS éphémère pour provisionner une plateforme web sécurisée avec Terraform, configurer les services avec Ansible, opérer l'accès via AWS Systems Manager et valider un lifecycle create/destroy maîtrisé côté coûts.",
+          "Projet d'infrastructure AWS éphémère pour provisionner une plateforme web sécurisée avec Terraform, configurer les services avec Ansible, opérer l'accès via AWS Systems Manager et valider un lifecycle create/destroy maîtrisé côté coûts.",
         stack: sharedStacks.ephemeralWeb,
         link: sharedProjectLinks.ephemeralWeb,
       },
@@ -449,7 +557,7 @@ export const portfolioContent = {
       {
         title: "Pokédex DevOps Deployment Lab",
         description:
-          "Lab personnel de déploiement DevOps amenant une application Node.js à travers Docker, infrastructure AWS, HTTPS, DNS, Ansible et CI.",
+          "Projet de delivery DevOps amenant une application Node.js à travers Docker, infrastructure AWS, HTTPS, DNS, Ansible et CI.",
         stack: sharedStacks.pokedex,
         liveUrl: sharedProjectLinks.pokedexLive,
         link: sharedProjectLinks.pokedex,
@@ -457,7 +565,7 @@ export const portfolioContent = {
       {
         title: "Kubernetes Visual Ops Lab",
         description:
-          "Lab visuel Kubernetes expliquant les concepts essentiels du cluster, le flow kubectl apply et les workflows de déploiement local avec Docker, kind et FastAPI.",
+          "Plateforme visuelle Kubernetes expliquant les concepts essentiels du cluster, le flow kubectl apply et les workflows de déploiement local avec Docker, kind et FastAPI.",
         stack: sharedStacks.k8sVisualOps,
         liveUrl: sharedProjectLinks.k8sVisualOpsLive,
         link: sharedProjectLinks.k8sVisualOps,

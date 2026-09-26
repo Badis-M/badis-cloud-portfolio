@@ -132,26 +132,39 @@ const heroUi = page.lang === "fr"
         <article class="experience">
           <div class="experience-header">
             <div>
-              <h3>Oracle — Cloud Consultant</h3>
-              <span>{page.experienceSection.oracleLocation}</span>
+              <h3>{page.experienceSection.oracleRole}</h3>
+              <span>{page.experienceSection.oracleLocation} · {page.experienceSection.oraclePeriod}</span>
             </div>
 
             <p>{page.experienceSection.oracleDescription}</p>
           </div>
 
-          <div class="experience-columns">
-            <div>
-              <h4>{page.experienceSection.clientsTitle}</h4>
-              <div class="client-list">
-                {page.clientEnvironments.map((client) => <span>{client}</span>)}
-              </div>
+          <div class="experience-clients">
+            <h4>{page.experienceSection.clientsTitle}</h4>
+            <div class="client-list">
+              {page.clientEnvironments.map((client) => <span>{client}</span>)}
             </div>
+          </div>
 
-            <div>
-              <h4>{page.experienceSection.missionsTitle}</h4>
-              <div class="mission-list">
-                {page.missionAreas.map((mission) => <span>{mission}</span>)}
-              </div>
+          <div class="experience-engagements">
+            <h4>{page.experienceSection.engagementsTitle}</h4>
+            <div class="client-engagement-grid">
+              {page.clientEngagements.map((engagement) => (
+                <article class="client-engagement-card">
+                  <span>{engagement.client}</span>
+                  <h3>{engagement.title}</h3>
+                  <ul>
+                    {engagement.highlights.map((highlight) => <li>{highlight}</li>)}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div class="cross-client-delivery">
+            <h4>{page.experienceSection.crossClientTitle}</h4>
+            <div class="mission-list">
+              {page.crossClientDelivery.map((item) => <span>{item}</span>)}
             </div>
           </div>
         </article>

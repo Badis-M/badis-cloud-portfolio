@@ -39,6 +39,51 @@ test.describe("Portfolio", () => {
     await expect(page.getByRole("link", { name: "LinkedIn ↗" }).first()).toHaveAttribute("href", externalLinks.linkedin);
   });
 
+  test("English page presents professional delivery in one section", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(page.getByRole("heading", { name: "Oracle — Senior Cloud Consultant" })).toBeVisible();
+    await expect(page.getByText("April 2022 – December 2025", { exact: false })).toBeVisible();
+    const clientList = page.locator(".client-list");
+    for (const client of ["Avaloq", "Rothschild", "Swissquote", "Corner Bank", "LEMO", "IEC"]) {
+      await expect(clientList).toContainText(client);
+    }
+
+    const professionalDelivery = page.locator("#skills");
+    await expect(professionalDelivery.getByRole("heading", { name: "Professional delivery" })).toBeVisible();
+    await expect(professionalDelivery).toContainText("Kubernetes, Amazon EKS, Azure AKS");
+    await expect(professionalDelivery).toContainText("Prometheus, Grafana, ServiceMonitor");
+    await expect(page.locator("footer")).toContainText("Deployed on Cloudflare Workers");
+  });
+
+  test("French page presents professional delivery in one section", async ({ page }) => {
+    await page.goto("/fr");
+
+    await expect(page.getByRole("heading", { name: "Oracle — Senior Cloud Consultant" })).toBeVisible();
+    await expect(page.getByText("Avril 2022 – Décembre 2025", { exact: false })).toBeVisible();
+
+    const professionalDelivery = page.locator("#skills");
+    await expect(professionalDelivery.getByRole("heading", { name: "Expérience professionnelle" })).toBeVisible();
+    await expect(professionalDelivery).toContainText("Kubernetes, Amazon EKS, Azure AKS");
+    await expect(professionalDelivery).toContainText("Prometheus, Grafana, ServiceMonitor");
+    await expect(page.locator("footer")).toContainText("Déployé sur Cloudflare Workers");
+  });
+
+  test("bilingual pages keep the new proof sections within the mobile viewport", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+
+    for (const path of ["/", "/fr"]) {
+      await page.goto(path);
+      await expect(page.getByRole("heading", { name: "Oracle — Senior Cloud Consultant" })).toBeVisible();
+
+      const hasHorizontalOverflow = await page.evaluate(
+        () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+      );
+
+      expect(hasHorizontalOverflow).toBeFalsy();
+    }
+  });
+
   test("English page section navigation targets the expected anchors", async ({ page }) => {
     await page.setViewportSize({ width: 1600, height: 900 });
     await page.goto("/");
