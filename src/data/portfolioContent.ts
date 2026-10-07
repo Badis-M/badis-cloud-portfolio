@@ -158,7 +158,7 @@ export const portfolioContent = {
           "Terraform provisioning and reusable infrastructure patterns",
           "Ansible post-provisioning configuration",
           "GitHub Actions pipelines with controlled approvals",
-          "Professional Kubernetes work with Amazon EKS and Azure AKS",
+          "Professional Kubernetes work with Amazon EKS",
           "IAM, networking, governance, and OCI Cloud Guard",
         ],
       },
@@ -168,6 +168,8 @@ export const portfolioContent = {
         highlights: [
           "OCI compute, VCN, subnets, and public/private addressing",
           "Secure transfers with SSH keys, IAM, SSO, and audit mechanisms",
+          "Network and port configuration for secure SFTP access",
+          "Sensitive data transfers in a financial environment",
         ],
       },
       {
@@ -176,13 +178,16 @@ export const portfolioContent = {
         highlights: [
           "Database migration support and tuning",
           "Delivery in a critical banking environment",
+          "Direct collaboration with Swissquote technical teams",
         ],
       },
       {
         client: "Corner Bank",
         title: "Exadata Cloud@Customer migration support",
         highlights: [
-          "Migration scripts and database tuning support",
+          "Database migration support towards Exadata Cloud@Customer",
+          "Scripts supporting the migration",
+          "Database tuning support",
           "Delivery in a critical banking environment",
         ],
       },
@@ -190,15 +195,19 @@ export const portfolioContent = {
         client: "LEMO",
         title: "OCI Landing Zone",
         highlights: [
-          "Terraform, networking, IAM, and governance",
-          "Reproducible cloud foundation in an OCI migration context",
+          "Automated infrastructure provisioning with Terraform",
+          "Networking, IAM, and cloud governance",
+          "Reproducible OCI cloud foundation",
+          "Landing zone implementation in an OCI migration context",
         ],
       },
       {
         client: "IEC",
         title: "Data and analytics platform",
         highlights: [
-          "ETL/ELT workflows with Oracle Autonomous Data Warehouse and Oracle Analytics Cloud",
+          "ETL/ELT workflows for a data and analytics platform",
+          "Oracle Autonomous Data Warehouse (ADW)",
+          "Oracle Analytics Cloud (OAC) for analytical use",
           "Data transfer, transformation, and analytical delivery",
         ],
       },
@@ -418,7 +427,7 @@ export const portfolioContent = {
           "Provisioning Terraform et patterns d'infrastructure réutilisables",
           "Configuration post-provisioning avec Ansible",
           "Pipelines GitHub Actions avec approbations contrôlées",
-          "Expérience professionnelle Kubernetes avec Amazon EKS et Azure AKS",
+          "Expérience professionnelle Kubernetes avec Amazon EKS",
           "IAM, networking, gouvernance et OCI Cloud Guard",
         ],
       },
@@ -428,6 +437,8 @@ export const portfolioContent = {
         highlights: [
           "OCI Compute, VCN, subnets et adressage public/privé",
           "Transferts sécurisés avec clés SSH, IAM, SSO et mécanismes d'audit",
+          "Configuration du réseau et des ports pour les accès SFTP sécurisés",
+          "Transfert de données sensibles dans un environnement financier",
         ],
       },
       {
@@ -436,13 +447,16 @@ export const portfolioContent = {
         highlights: [
           "Support migration de bases de données et tuning",
           "Delivery dans un environnement bancaire critique",
+          "Collaboration directe avec les équipes techniques Swissquote",
         ],
       },
       {
         client: "Corner Bank",
         title: "Support de migration Exadata Cloud@Customer",
         highlights: [
-          "Scripts de migration et support database tuning",
+          "Support de migration de bases vers Exadata Cloud@Customer",
+          "Scripts associés à la migration",
+          "Support de tuning des bases de données",
           "Delivery dans un environnement bancaire critique",
         ],
       },
@@ -450,15 +464,19 @@ export const portfolioContent = {
         client: "LEMO",
         title: "OCI Landing Zone",
         highlights: [
-          "Terraform, networking, IAM et gouvernance",
-          "Fondation cloud reproductible dans un contexte de migration OCI",
+          "Provisioning automatisé de l'infrastructure avec Terraform",
+          "Networking, IAM et gouvernance cloud",
+          "Fondation cloud OCI reproductible",
+          "Mise en place de la landing zone dans un contexte de migration OCI",
         ],
       },
       {
         client: "IEC",
         title: "Plateforme Data et Analytics",
         highlights: [
-          "Workflows ETL/ELT avec Oracle Autonomous Data Warehouse et Oracle Analytics Cloud",
+          "Workflows ETL/ELT pour une plateforme Data et Analytics",
+          "Oracle Autonomous Data Warehouse (ADW)",
+          "Oracle Analytics Cloud (OAC) pour l'exploitation analytique",
           "Transfert, transformation et exploitation analytique des données",
         ],
       },
