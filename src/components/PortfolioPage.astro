@@ -8,6 +8,7 @@ type PortfolioContent = (typeof portfolioContent)[keyof typeof portfolioContent]
 const page = (Astro.props.content ?? portfolioContent.en) as PortfolioContent;
 const [featuredClientEngagement, ...otherClientEngagements] = page.clientEngagements;
 const ui = portfolioPresentation[page.lang as "fr" | "en"];
+const [availabilityLabel, availabilityContext] = ui.status.split(" — ");
 
 const siteUrl = Astro.site ?? new URL("https://portfolio.badismerakchi.com");
 const canonicalPath = page.lang === "fr" ? "/fr/" : "/";
@@ -113,7 +114,7 @@ const heroUi = page.lang === "fr"
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-glow" aria-hidden="true"></div>
         <div class="hero-content">
-          <p class="availability"><span aria-hidden="true"></span>{ui.status}</p>
+          <p class="availability"><span class="availability-dot" aria-hidden="true"></span><span><span class="availability-label">{availabilityLabel}</span> — {availabilityContext}</span></p>
           <p class="hero-name">Badis Merakchi</p>
           <h1 id="hero-title" class="text-gradient">{ui.role}</h1>
           <p class="hero-value">{ui.value}</p>
