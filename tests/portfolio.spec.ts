@@ -21,7 +21,7 @@ test.describe("Portfolio", () => {
     await page.goto("/");
 
     await expect(page).toHaveTitle(/Badis Merakchi/);
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Cloud & DevOps Engineer");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Senior Cloud & DevOps Consultant");
 
     await expect(page.getByRole("link", { name: "Download CV" })).toHaveAttribute("href", externalLinks.cv);
     await expect(page.getByRole("link", { name: "GitHub ↗" }).first()).toHaveAttribute("href", externalLinks.github);
@@ -34,7 +34,7 @@ test.describe("Portfolio", () => {
     await page.getByRole("link", { name: "FR" }).click();
 
     await expect(page).toHaveURL(/\/fr\/?$/);
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("Cloud & DevOps Engineer spécialisé");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Senior Cloud & DevOps Consultant");
 
     await expect(page.getByRole("link", { name: "Télécharger le CV" })).toHaveAttribute("href", externalLinks.cv);
     await expect(page.getByRole("link", { name: "GitHub ↗" }).first()).toHaveAttribute("href", externalLinks.github);
@@ -78,7 +78,7 @@ test.describe("Portfolio", () => {
   test("English page presents professional delivery in one section", async ({ page }) => {
     await page.goto("/");
 
-    await expect(page.getByRole("heading", { name: "Oracle — Senior Cloud Consultant" })).toBeVisible();
+    await expect(page.locator("#experience").getByRole("heading", { name: "Senior Cloud Consultant", exact: true })).toBeVisible();
     await expect(page.getByText("April 2022 – December 2025", { exact: false })).toBeVisible();
     await expect(page.locator(".featured-client-engagement")).toContainText("Avaloq");
     const clientEngagements = page.locator(".client-engagement-grid");
@@ -87,16 +87,17 @@ test.describe("Portfolio", () => {
     }
 
     const professionalDelivery = page.locator("#skills");
-    await expect(professionalDelivery.getByRole("heading", { name: "Professional delivery" })).toBeVisible();
-    await expect(professionalDelivery).toContainText("Kubernetes, Amazon EKS, Azure AKS");
-    await expect(professionalDelivery).toContainText("Prometheus, Grafana, ServiceMonitor");
-    await expect(page.locator("footer")).toContainText("Deployed on Cloudflare Workers");
+    await expect(professionalDelivery.getByRole("heading", { name: "Technical expertise" })).toBeVisible();
+    for (const tool of ["Kubernetes", "EKS", "AKS", "Prometheus", "Grafana", "ServiceMonitor"]) {
+      await expect(professionalDelivery).toContainText(tool);
+    }
+    await expect(page.locator("footer")).toContainText("Based in Lausanne");
   });
 
   test("French page presents professional delivery in one section", async ({ page }) => {
     await page.goto("/fr");
 
-    await expect(page.getByRole("heading", { name: "Oracle — Senior Cloud Consultant" })).toBeVisible();
+    await expect(page.locator("#experience").getByRole("heading", { name: "Senior Cloud Consultant", exact: true })).toBeVisible();
     await expect(page.getByText("Avril 2022 – Décembre 2025", { exact: false })).toBeVisible();
     await expect(page.locator(".featured-client-engagement")).toContainText("Avaloq");
     const clientEngagements = page.locator(".client-engagement-grid");
@@ -105,10 +106,11 @@ test.describe("Portfolio", () => {
     }
 
     const professionalDelivery = page.locator("#skills");
-    await expect(professionalDelivery.getByRole("heading", { name: "Expérience professionnelle" })).toBeVisible();
-    await expect(professionalDelivery).toContainText("Kubernetes, Amazon EKS, Azure AKS");
-    await expect(professionalDelivery).toContainText("Prometheus, Grafana, ServiceMonitor");
-    await expect(page.locator("footer")).toContainText("Déployé sur Cloudflare Workers");
+    await expect(professionalDelivery.getByRole("heading", { name: "Expertise technique" })).toBeVisible();
+    for (const tool of ["Kubernetes", "EKS", "AKS", "Prometheus", "Grafana", "ServiceMonitor"]) {
+      await expect(professionalDelivery).toContainText(tool);
+    }
+    await expect(page.locator("footer")).toContainText("Basé à Lausanne");
   });
 
   test("bilingual pages keep the new proof sections within the mobile viewport", async ({ page }) => {
@@ -116,7 +118,7 @@ test.describe("Portfolio", () => {
 
     for (const path of ["/", "/fr"]) {
       await page.goto(path);
-      await expect(page.getByRole("heading", { name: "Oracle — Senior Cloud Consultant" })).toBeVisible();
+      await expect(page.locator("#experience").getByRole("heading", { name: "Senior Cloud Consultant", exact: true })).toBeVisible();
 
       const hasHorizontalOverflow = await page.evaluate(
         () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
@@ -191,6 +193,46 @@ test.describe("Portfolio", () => {
 
     expect(response.ok()).toBeTruthy();
     expect(response.headers()["content-type"]).toContain("application/pdf");
+  });
+
+  test("new design preserves bilingual proof and accessible project details", async ({ page }) => {
+    for (const path of ["/", "/fr/"]) {
+      await page.goto(path);
+      await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
+      await expect(page.locator(".hero-facts")).toContainText("Lausanne");
+      await expect(page.locator(".hero-facts")).toContainText("C1");
+      await expect(page.locator("#education")).toContainText("Dublin City University");
+      await expect(page.locator("#experience")).toContainText("Amazon EKS");
+      await expect(page.locator(".featured-client-engagement")).not.toContainText("AKS");
+      const clientCards = page.locator(".client-engagement-card:not(.cross-client-delivery)");
+      await expect(clientCards).toHaveCount(5);
+      for (const card of await clientCards.all()) {
+        const pointCount = await card.locator("li").count();
+        expect(pointCount).toBeGreaterThanOrEqual(3);
+        expect(pointCount).toBeLessThanOrEqual(4);
+      }
+      await expect(page.locator(".hero a", { hasText: "Consulting" })).toHaveAttribute("href", externalLinks.consulting);
+      const details = page.locator(".project-details").first();
+      await details.locator("summary").focus();
+      await page.keyboard.press("Enter");
+      await expect(details).toHaveAttribute("open", "");
+      await expect(details.locator("li").first()).toBeVisible();
+    }
+  });
+
+  test("new layout fits narrow mobile, tablet and desktop viewports", async ({ page }, testInfo) => {
+    for (const path of ["/", "/fr/"]) {
+      for (const width of [320, 390, 768, 1440]) {
+        await page.setViewportSize({ width, height: 900 });
+        await page.goto(path);
+        await page.evaluate(() => document.fonts.ready);
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
+        await expect(page.locator(".main-nav")).toBeVisible();
+        const language = path === "/" ? "en" : "fr";
+        await page.screenshot({ path: testInfo.outputPath(`${language}-${width}.png`), fullPage: true });
+        await page.locator(".hero").screenshot({ path: testInfo.outputPath(`${language}-${width}-hero.png`) });
+      }
+    }
   });
 
   test("SEO discovery files and social image are served", async ({ request }) => {

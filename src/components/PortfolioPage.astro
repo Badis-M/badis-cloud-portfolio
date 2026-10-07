@@ -1,11 +1,13 @@
 ---
 import "../styles/portfolio.css";
 import { portfolioContent, portfolioLinks } from "../data/portfolioContent";
+import { portfolioPresentation, education, certifications, earlierExperiences } from "../data/portfolioPresentation";
 
 type PortfolioContent = (typeof portfolioContent)[keyof typeof portfolioContent];
 
 const page = (Astro.props.content ?? portfolioContent.en) as PortfolioContent;
 const [featuredClientEngagement, ...otherClientEngagements] = page.clientEngagements;
+const ui = portfolioPresentation[page.lang as "fr" | "en"];
 
 const siteUrl = Astro.site ?? new URL("https://portfolio.badismerakchi.com");
 const canonicalPath = page.lang === "fr" ? "/fr/" : "/";
@@ -26,7 +28,7 @@ const structuredData = {
   description: page.description,
   workLocation: {
     "@type": "Place",
-    name: page.lang === "fr" ? "Région de Genève, Suisse" : "Geneva area, Switzerland",
+    name: page.lang === "fr" ? "Lausanne et Genève, Suisse" : "Lausanne and Geneva, Switzerland",
   },
   sameAs: [portfolioLinks.github, portfolioLinks.linkedin, portfolioLinks.consulting],
   mainEntityOfPage: canonicalUrl,
@@ -83,323 +85,160 @@ const heroUi = page.lang === "fr"
     <meta name="twitter:image:alt" content={socialImageAlt} />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
 
   <body>
-    <a class="skip-link" href="#main-content">
-      {page.lang === "fr" ? "Aller au contenu principal" : "Skip to main content"}
-    </a>
-
+    <a class="skip-link" href="#main-content">{page.lang === "fr" ? "Aller au contenu principal" : "Skip to main content"}</a>
     <header class="site-header">
-      <div class="header page">
-        <a
-          class="logo"
-          href={page.lang === "fr" ? "/fr" : "/"}
-          aria-label={page.lang === "fr" ? "Badis Merakchi — Accueil" : "Badis Merakchi — Home"}
-        >
-          <span class="logo-mark" aria-hidden="true">BM</span>
-          <span class="logo-name">Badis Merakchi</span>
-        </a>
-
+      <div class="header container">
+        <a class="logo" href={page.lang === "fr" ? "/fr/" : "/"} aria-label={page.lang === "fr" ? "Badis Merakchi — Accueil" : "Badis Merakchi — Home"}>Badis M</a>
         <nav class="main-nav" aria-label={page.lang === "fr" ? "Navigation principale" : "Main navigation"}>
-          <a href="#skills">{page.nav.skills}</a>
           <a href="#experience">{page.nav.experience}</a>
+          <a href="#skills">{page.nav.skills}</a>
           <a href="#projects">{page.nav.projects}</a>
           <a href="#contact">{page.nav.contact}</a>
-          <a href={portfolioLinks.cv}>CV</a>
         </nav>
-
         <div class="header-actions">
-          <a
-            class="consulting-link"
-            href={portfolioLinks.consulting}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Consulting ↗
-          </a>
-
           <div class="language-switch" aria-label={page.languageLabel}>
-            <a class:list={[page.lang === "en" && "active"]} href="/" aria-current={page.lang === "en" ? "page" : undefined}>EN</a>
-            <a class:list={[page.lang === "fr" && "active"]} href="/fr" aria-current={page.lang === "fr" ? "page" : undefined}>FR</a>
+            <a href="/fr/" aria-current={page.lang === "fr" ? "page" : undefined}>FR</a>
+            <a href="/" aria-current={page.lang === "en" ? "page" : undefined}>EN</a>
           </div>
+          <a class="header-cv" href={portfolioLinks.cv}>CV ↗</a>
         </div>
       </div>
     </header>
 
-    <main id="main-content" class="page">
+    <main id="main-content" class="container">
       <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="hero-context">{page.hero.status}</p>
-
-          <p class="hero-kicker">{heroUi.portfolioLabel}</p>
-
-          <h1 id="hero-title">{page.hero.title}</h1>
-
-          <p class="lead">{page.hero.lead}</p>
-
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="availability"><span aria-hidden="true"></span>{ui.status}</p>
+          <p class="hero-name">Badis Merakchi</p>
+          <h1 id="hero-title" class="text-gradient">{ui.role}</h1>
+          <p class="hero-value">{ui.value}</p>
+          <p class="hero-intro">{page.hero.lead}</p>
           <div class="actions">
-            <a class="button primary" href="#projects">{heroUi.projectsButton}</a>
-            <a class="button secondary" href={portfolioLinks.cv}>{page.hero.cvButton}</a>
+            <a class="button primary" href={portfolioLinks.cv}>{page.hero.cvButton}</a>
+            <a class="button secondary" href="#projects">{heroUi.projectsButton}</a>
           </div>
-
-          <div class="hero-tertiary-links" aria-label={heroUi.profileLinksLabel}>
+          <div class="profile-links" aria-label={heroUi.profileLinksLabel}>
             <a href={portfolioLinks.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
             <a href={portfolioLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
             <a href={portfolioLinks.consulting} target="_blank" rel="noreferrer">Consulting ↗</a>
           </div>
-
-          <ul class="credibility-chips" aria-label={heroUi.credibilityLabel}>
-            {heroUi.credibilityChips.map((chip) => <li>{chip}</li>)}
-          </ul>
-
-          <p class="hero-availability">
-            <span aria-hidden="true"></span>
-            {page.hero.availability}
-          </p>
-        </div>
-      </section>
-
-      <section id="skills" class="section">
-        <div class="section-head">
-          <p>{page.skillsSection.eyebrow}</p>
-          <h2>{page.skillsSection.title}</h2>
-        </div>
-
-        <div class="skills-grid">
-          {page.skills.map(([label, value]) => (
-            <div class="skill-card">
-              <span>{label}</span>
-              <strong>{value}</strong>
-            </div>
-          ))}
+          <div class="hero-facts">
+            <div><span class="eyebrow">{ui.locationLabel}</span><p>{ui.location}</p></div>
+            <div><span class="eyebrow">{ui.focusLabel}</span><p>{ui.focus}</p></div>
+          </div>
         </div>
       </section>
 
       <section id="experience" class="section">
-        <div class="section-head experience-section-head">
-          <div>
-            <p>{page.experienceSection.eyebrow}</p>
-            <h2>{page.experienceSection.title}</h2>
-          </div>
-          <div class="experience-meta">
-            <span>{page.experienceSection.oracleLocation}</span>
-            <span>{page.experienceSection.oraclePeriod}</span>
-          </div>
+        <div class="section-heading"><span class="section-number">01 —</span><h2>{ui.experience}</h2><span class="section-rule" aria-hidden="true"></span></div>
+        <div class="experience-heading">
+          <div><h3>Senior Cloud Consultant</h3><p>Oracle, {page.lang === "fr" ? "Genève" : "Geneva"}</p></div>
+          <span class="date-badge">{page.experienceSection.oraclePeriod}</span>
         </div>
-
-        <article class="experience">
-          <p class="experience-summary">{page.experienceSection.oracleDescription}</p>
-
-          <article class="featured-client-engagement">
-            <div class="featured-client-label">
-              <span>{page.experienceSection.featuredEngagementLabel}</span>
-              <strong>{featuredClientEngagement.client}</strong>
-            </div>
-            <div class="featured-client-copy">
-              <h3>{featuredClientEngagement.title}</h3>
-              <ul>
-                {featuredClientEngagement.highlights.map((highlight) => <li>{highlight}</li>)}
-              </ul>
-            </div>
-          </article>
-
-          <div class="experience-engagements">
-            <h4>{page.experienceSection.engagementsTitle}</h4>
-            <div class="client-engagement-grid">
-              {otherClientEngagements.map((engagement) => (
-                <article class="client-engagement-card">
-                  <span>{engagement.client}</span>
-                  <div class="client-engagement-copy">
-                    <h3>{engagement.title}</h3>
-                    <ul>
-                      {engagement.highlights.map((highlight) => <li>{highlight}</li>)}
-                    </ul>
-                  </div>
-                </article>
-              ))}
-            </div>
+        <p class="section-intro">{ui.experienceSummary}</p>
+        <article class="featured-client-engagement">
+          <div class="featured-client-description">
+            <div class="client-topline"><h4>{featuredClientEngagement.client}</h4><span class="mission-badge">{page.experienceSection.featuredEngagementLabel}</span></div>
+            <h5>{featuredClientEngagement.title}</h5>
+            <p>{page.lang === "fr" ? "Landing zones AWS et OCI pour des environnements de développement, staging et production, industrialisées avec Terraform, Ansible et GitHub Actions." : "AWS and OCI landing zones for development, staging and production environments, industrialised with Terraform, Ansible and GitHub Actions."}</p>
+            <ul class="tags" aria-label={ui.technologies}>{["AWS", "OCI", "Terraform", "Ansible", "GitHub Actions", "EKS"].map((tool) => <li>{tool}</li>)}</ul>
           </div>
-
-          <div class="experience-proof-strip" aria-label={page.experienceSection.proofSummaryLabel}>
-            {page.experienceSection.proofItems.map((item) => <span>{item}</span>)}
-          </div>
-
-          <div class="cross-client-delivery">
-            <h4>{page.experienceSection.crossClientTitle}</h4>
-            <ul class="cross-client-list">
-              {page.crossClientDelivery.map((item) => <li>{item}</li>)}
-            </ul>
-          </div>
+          <ul class="featured-client-highlights">{featuredClientEngagement.highlights.map((highlight) => <li>{highlight}</li>)}</ul>
         </article>
+        <div class="client-engagement-grid">
+          {otherClientEngagements.map((engagement) => (
+            <article class="client-engagement-card">
+              <h4>{engagement.client}</h4><h5>{engagement.title}</h5>
+              <ul>{engagement.highlights.map((highlight) => <li>{highlight}</li>)}</ul>
+            </article>
+          ))}
+          <article class="client-engagement-card cross-client-delivery">
+            <h4>{page.experienceSection.crossClientTitle}</h4>
+            <ul>{page.crossClientDelivery.map((item) => <li>{item}</li>)}</ul>
+          </article>
+        </div>
+        <div class="earlier-experience">
+          <p class="eyebrow">{ui.earlier}</p>
+          {earlierExperiences.map((item) => (
+            <article class="earlier-row">
+              <span class="earlier-date">{item.dates}</span><h3>{item[page.lang as "fr" | "en"]}</h3><span>{item.company}</span>
+            </article>
+          ))}
+        </div>
+      </section>
 
-        <div class="additional-experience-grid">
-          {page.additionalExperiences.map((item) => (
-            <article class="additional-experience-card">
-              <div>
-                <span>{item.company}</span>
-                <h3>{item.role}</h3>
-              </div>
-
-              <p>{item.description}</p>
-
-              <div class="compact-tags">
-                {item.tags.map((tag) => <span>{tag}</span>)}
-              </div>
+      <section id="skills" class="section">
+        <div class="section-heading"><span class="section-number">02 —</span><h2>{ui.expertise}</h2><span class="section-rule" aria-hidden="true"></span></div>
+        <div class="skills-grid">
+          {ui.skills.map((skill, index) => (
+            <article class="skill-card">
+              <span class="skill-number">{String(index + 1).padStart(2, "0")}</span>
+              <h3>{skill.title}</h3><p>{skill.description}</p>
+              <ul class="compact-tags" aria-label={ui.technologies}>{skill.tools.map((tool) => <li>{tool}</li>)}</ul>
             </article>
           ))}
         </div>
       </section>
 
       <section id="projects" class="section">
-        <div class="section-head">
-          <p>{page.projectsSection.eyebrow}</p>
-          <h2>{page.projectsSection.title}</h2>
+        <div class="section-heading"><span class="section-number">03 —</span><h2>{ui.projects}</h2><span class="section-rule" aria-hidden="true"></span></div>
+        <div class="featured-project-grid">
+          {[page.featuredProject, page.spotlightProject].map((project) => (
+            <article class="featured-project-card">
+              <h3>{project.title}</h3>
+              <dl>
+                <div><dt class="eyebrow">{ui.goal}</dt><dd>{project.description}</dd></div>
+                <div><dt class="eyebrow">{ui.demonstrates}</dt><dd>{project.proof}</dd></div>
+                <div><dt class="eyebrow">{ui.technologies}</dt><dd><ul class="tags">{project.stack.map((tool) => <li>{tool}</li>)}</ul></dd></div>
+              </dl>
+              <details class="project-details"><summary>{ui.details}</summary><ul>{project.highlights.map((highlight) => <li>{highlight}</li>)}</ul></details>
+              <a class="project-link" href={project.link} target="_blank" rel="noopener noreferrer">{page.projectsSection.featuredRepositoryLabel}</a>
+            </article>
+          ))}
         </div>
-
-        <article class="featured-project-card">
-          <div class="featured-copy">
-            <div class="featured-topline">
-              <p class="featured-label">{page.projectsSection.featuredLabel}</p>
-            </div>
-
-            <h3>{page.featuredProject.title}</h3>
-            <p>{page.featuredProject.description}</p>
-            <p class="featured-proof">{page.featuredProject.proof}</p>
-
-            <div class="featured-metrics">
-              {page.featuredProject.metrics.map(([label, value]) => (
-                <div>
-                  <span>{label}</span>
-                  <strong>{value}</strong>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div class="featured-meta">
-            <div>
-              <h4>{page.projectsSection.scopeTitle}</h4>
-              <ul class="featured-highlights">
-                {page.featuredProject.highlights.map((highlight) => <li>{highlight}</li>)}
-              </ul>
-            </div>
-
-            <div>
-              <h4>{page.projectsSection.stackTitle}</h4>
-              <div class="tags">
-                {page.featuredProject.stack.map((item) => <span>{item}</span>)}
-              </div>
-            </div>
-
-            <a href={page.featuredProject.link} target="_blank" rel="noopener noreferrer">{page.projectsSection.featuredRepositoryLabel}</a>
-          </div>
-        </article>
-
-        <article class="spotlight-project-card">
-          <div class="spotlight-copy">
-            <div class="featured-topline">
-              <p class="featured-label">{page.projectsSection.spotlightLabel}</p>
-            </div>
-
-            <h3>{page.spotlightProject.title}</h3>
-            <p>{page.spotlightProject.description}</p>
-            <p class="featured-proof">{page.spotlightProject.proof}</p>
-
-            <div class="featured-metrics">
-              {page.spotlightProject.metrics.map(([label, value]) => (
-                <div>
-                  <span>{label}</span>
-                  <strong>{value}</strong>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div class="spotlight-meta">
-            <div>
-              <h4>{page.projectsSection.scopeTitle}</h4>
-              <ul class="featured-highlights">
-                {page.spotlightProject.highlights.map((highlight) => <li>{highlight}</li>)}
-              </ul>
-            </div>
-
-            <div>
-              <h4>{page.projectsSection.stackTitle}</h4>
-              <div class="tags">
-                {page.spotlightProject.stack.map((item) => <span>{item}</span>)}
-              </div>
-            </div>
-
-            <a href={page.spotlightProject.link} target="_blank" rel="noopener noreferrer">
-              {page.projectsSection.spotlightRepositoryLabel}
-            </a>
-          </div>
-        </article>
-
-        <div class="project-subhead-card">
-          <div>
-            <p>{page.projectsSection.otherEyebrow}</p>
-            <h3>{page.projectsSection.otherTitle}</h3>
-          </div>
-        </div>
-
+        <p class="eyebrow other-projects-title">{page.projectsSection.otherEyebrow}</p>
         <div class="projects-grid">
           {page.projects.map((project) => (
             <article class="project-card">
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-
-              <div class="tags">
-                {project.stack.map((item) => <span>{item}</span>)}
-              </div>
-
-              <div class="project-links">
-                {"liveUrl" in project && project.liveUrl && (
-                  <a class="project-link live" href={project.liveUrl} target="_blank" rel="noopener noreferrer">{page.projectsSection.liveSiteLabel}</a>
-                )}
-                <a class="project-link" href={project.link} target="_blank" rel="noopener noreferrer">{page.projectsSection.repositoryLabel}</a>
+              <h3>{project.title}</h3><p>{project.description}</p>
+              <ul class="compact-tags" aria-label={ui.technologies}>{project.stack.map((tool) => <li>{tool}</li>)}</ul>
+              <div class="project-actions">
+                <a href={project.link} target="_blank" rel="noopener noreferrer">{page.projectsSection.repositoryLabel}</a>
+                {"liveUrl" in project && <a class="live-link" href={project.liveUrl} target="_blank" rel="noopener noreferrer">{page.projectsSection.liveSiteLabel}</a>}
               </div>
             </article>
           ))}
         </div>
       </section>
 
-      <section id="contact" class="section contact">
-        <div>
-          <p class="status danger">{page.contactSection.eyebrow}</p>
-          <h2>{page.contactSection.title}</h2>
-          <p class="contact-intro">{page.contactSection.intro}</p>
+      <section id="education" class="section">
+        <div class="section-heading"><span class="section-number">04 —</span><h2>{ui.education}</h2><span class="section-rule" aria-hidden="true"></span></div>
+        <div class="education-grid">
+          {education.map((item) => <article class="education-card"><h3>{item.title}</h3><p>{item.school} · {item.period}</p></article>)}
         </div>
+        <p class="eyebrow other-projects-title">{ui.certifications}</p>
+        <ul class="certification-grid">{certifications.map((item) => <li>{item}</li>)}</ul>
+      </section>
 
+      <section id="contact" class="section">
         <div class="contact-panel">
-          <div>
-            <span>{page.contactSection.emailLabel}</span>
-            <a href={`mailto:${portfolioLinks.email}`}>{portfolioLinks.email}</a>
-          </div>
-
-          <div>
-            <span>{page.contactSection.locationLabel}</span>
-            <strong>{page.contactSection.locationValue}</strong>
-          </div>
-
-          <div>
-            <span>{page.contactSection.availabilityLabel}</span>
-            <strong>{page.contactSection.availabilityValue}</strong>
-          </div>
-
-          <div>
-            <span>{page.contactSection.profilesLabel}</span>
-            <a href={portfolioLinks.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href={portfolioLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <p class="eyebrow"><span class="section-number">05</span> — Contact</p>
+          <h2>{ui.contactFirst}<br /><span class="text-gradient">{ui.contactSecond}</span></h2>
+          <a class="button primary email-button" href={`mailto:${portfolioLinks.email}`}>{portfolioLinks.email}</a>
+          <div class="profile-links">
+            <a href={portfolioLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a href={portfolioLinks.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a href={portfolioLinks.cv}>CV (PDF) ↗</a>
+            <a href={portfolioLinks.consulting} target="_blank" rel="noreferrer">Consulting ↗</a>
           </div>
         </div>
       </section>
-
-      <footer class="footer">
-        <p>{page.footer}</p>
-      </footer>
     </main>
+    <footer class="site-footer"><div class="container"><span>© 2026 Badis Merakchi</span><span>{ui.location}</span></div></footer>
   </body>
 </html>

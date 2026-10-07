@@ -1,10 +1,26 @@
 # Portfolio Project State
 
-## Audit baseline
+## Current migration — 2026-10-07
+
+The Lovable design has been ported to native Astro/CSS on `codex/lovable-visual-migration`; it is not yet deployed. The previous version is backed up by the annotated `V1.0` tag, pushed to GitHub at commit `9e05b945c8404e166f04d85d7fb37cc82db532b8`.
+
+- `portfolio_new/` is a preserved local reference, excluded from Git and Astro's TypeScript check. Its React/TanStack/Nitro runtime was not imported.
+- New presentation copy, grouped expertise, education, certifications and earlier-career data live in `src/data/portfolioPresentation.ts`; existing professional/project evidence remains in `portfolioContent.ts`.
+- The user confirmed Lausanne location, mobility to Geneva, native French/English C1, education, earlier-career dates and certifications from the export. Public client names and Kubernetes/EKS/AKS work at Avaloq were previously confirmed.
+- The new layout has a horizontal header, centered hero, Oracle/Avaloq-led experience, eight expertise cards, projects with native expandable implementation details, education/certifications, contact and footer.
+- Existing CV, repository/live-site destinations, GitHub, LinkedIn, Consulting and bilingual SEO are preserved.
+- Sora/Manrope fonts are hosted locally in `public/fonts/` with OFL licenses. No frontend JavaScript, dependency or backend was added.
+- Cloudflare deployment and security configuration are unchanged. Current HSTS is `max-age=31536000` without preload.
+- Validate with `npm run build`, `npm run test:e2e` and `git diff --check`. Review `/` and `/fr/` using `npm run dev` before approving publication.
+- Browser checks cover keyboard-operated project details and widths 320/390/768/1440 in both languages.
+- Optional `npx astro check` reports an existing missing Node type for `process` in `playwright.config.ts`; this is not a successful full type check.
+- Keep `V1.0` intact. After any future publication, recover through a reviewed revert instead of rewriting shared history.
+
+## Historical audit baseline (superseded where noted above)
 
 This document records the repository and live-site state reviewed on 2026-09-01. It is planning context for a future visual refactor; it does not authorize implementation or deployment changes.
 
-## Current site purpose
+## Site purpose
 
 The portfolio is a bilingual technical credibility site for Badis Merakchi's Cloud and DevOps profile. Its primary job is to support:
 

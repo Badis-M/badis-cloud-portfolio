@@ -31,3 +31,6 @@ blob-report/
 # Local Codex context
 /AGENTS.md
 /docs/PROJECT_CONTEXT.md
+
+# Local Lovable design reference (not part of the production site)
+/portfolio_new/
