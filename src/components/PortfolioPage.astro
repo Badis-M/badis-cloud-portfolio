@@ -190,7 +190,7 @@ const heroUi = page.lang === "fr"
                 <div><dt class="eyebrow">{ui.demonstrates}</dt><dd>{project.proof}</dd></div>
                 <div><dt class="eyebrow">{ui.technologies}</dt><dd><ul class="tags">{project.stack.map((tool) => <li>{tool}</li>)}</ul></dd></div>
               </dl>
-              <details class="project-details"><summary>{ui.details}</summary><ul>{project.highlights.map((highlight) => <li>{highlight}</li>)}</ul></details>
+              <details class="project-details" open><summary>{ui.details}</summary><ul>{project.highlights.map((highlight) => <li>{highlight}</li>)}</ul></details>
               <a class="project-link" href={project.link} target="_blank" rel="noopener noreferrer">{page.projectsSection.featuredRepositoryLabel}</a>
             </article>
           ))}

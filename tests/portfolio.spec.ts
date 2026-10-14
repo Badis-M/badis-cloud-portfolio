@@ -208,6 +208,9 @@ test.describe("Portfolio", () => {
         await expect(page.locator("h1")).toHaveCSS("font-family", /Instrument Serif/);
         await expect(page.locator("h1 em")).toHaveText("Consultant");
         await expect(page.locator(".availability-label")).toBeVisible();
+        await expect(page.locator(".project-details").first()).toHaveAttribute("open", "");
+        await page.locator(".project-details summary").first().click();
+        await expect(page.locator(".project-details").first()).not.toHaveAttribute("open", "");
         await page.locator(".project-details summary").first().click();
         await expect(page.locator(".project-details").first()).toHaveAttribute("open", "");
       }
@@ -234,7 +237,13 @@ test.describe("Portfolio", () => {
       }
       await expect(page.locator(".hero a", { hasText: "Consulting" })).toHaveAttribute("href", externalLinks.consulting);
       const details = page.locator(".project-details").first();
+      for (const projectDetails of await page.locator(".project-details").all()) {
+        await expect(projectDetails).toHaveAttribute("open", "");
+        await expect(projectDetails.locator("li").first()).toBeVisible();
+      }
       await details.locator("summary").focus();
+      await page.keyboard.press("Enter");
+      await expect(details).not.toHaveAttribute("open", "");
       await page.keyboard.press("Enter");
       await expect(details).toHaveAttribute("open", "");
       await expect(details.locator("li").first()).toBeVisible();
