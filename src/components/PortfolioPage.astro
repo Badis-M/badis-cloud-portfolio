@@ -37,18 +37,12 @@ const structuredData = {
 
 const heroUi = page.lang === "fr"
   ? {
-      portfolioLabel: "Portfolio technique de Badis Merakchi",
       projectsButton: "Voir mes projets",
       profileLinksLabel: "Profils professionnels",
-      credibilityLabel: "Compétences techniques clés",
-      credibilityChips: ["Terraform", "AWS · Azure · OCI", "CI/CD", "Kubernetes", "Linux"],
     }
   : {
-      portfolioLabel: "Badis Merakchi's technical portfolio",
       projectsButton: "View my projects",
       profileLinksLabel: "Professional profiles",
-      credibilityLabel: "Core technical skills",
-      credibilityChips: ["Terraform", "AWS · Azure · OCI", "CI/CD", "Kubernetes", "Linux"],
     };
 ---
 
@@ -112,11 +106,10 @@ const heroUi = page.lang === "fr"
 
     <main id="main-content" class="container">
       <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-glow" aria-hidden="true"></div>
         <div class="hero-content">
           <p class="availability"><span class="availability-dot" aria-hidden="true"></span><span><span class="availability-label">{availabilityLabel}</span> — {availabilityContext}</span></p>
           <p class="hero-name">Badis Merakchi</p>
-          <h1 id="hero-title" class="text-gradient">{ui.role}</h1>
+          <h1 id="hero-title">{ui.role.replace(/ Consultant$/, "")} <em class="accent-text">Consultant</em></h1>
           <p class="hero-value">{ui.value}</p>
           <p class="hero-intro">{page.hero.lead}</p>
           <div class="actions">
@@ -229,7 +222,7 @@ const heroUi = page.lang === "fr"
       <section id="contact" class="section">
         <div class="contact-panel">
           <p class="eyebrow"><span class="section-number">05</span> — Contact</p>
-          <h2>{ui.contactFirst}<br /><span class="text-gradient">{ui.contactSecond}</span></h2>
+          <h2>{ui.contactFirst}<br /><span class="accent-text">{ui.contactSecond}</span></h2>
           <a class="button primary email-button" href={`mailto:${portfolioLinks.email}`}>{portfolioLinks.email}</a>
           <div class="profile-links">
             <a href={portfolioLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>

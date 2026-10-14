@@ -195,6 +195,27 @@ test.describe("Portfolio", () => {
     expect(response.headers()["content-type"]).toContain("application/pdf");
   });
 
+  test("editorial theme uses local fonts and works without JavaScript", async ({ browser, request }) => {
+    for (const font of ["instrument-serif-regular.ttf", "instrument-serif-italic.ttf", "manrope-variable.ttf"]) {
+      expect((await request.get(`/fonts/${font}`)).ok()).toBeTruthy();
+    }
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    try {
+      const page = await context.newPage();
+      for (const path of ["/", "/fr/"]) {
+        await page.goto(`http://127.0.0.1:4321${path}`);
+        await expect(page.locator("html")).toHaveCSS("color-scheme", "light");
+        await expect(page.locator("h1")).toHaveCSS("font-family", /Instrument Serif/);
+        await expect(page.locator("h1 em")).toHaveText("Consultant");
+        await expect(page.locator(".availability-label")).toBeVisible();
+        await page.locator(".project-details summary").first().click();
+        await expect(page.locator(".project-details").first()).toHaveAttribute("open", "");
+      }
+    } finally {
+      await context.close();
+    }
+  });
+
   test("new design preserves bilingual proof and accessible project details", async ({ page }) => {
     for (const path of ["/", "/fr/"]) {
       await page.goto(path);
