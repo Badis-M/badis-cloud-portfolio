@@ -1,5 +1,5 @@
 export const portfolioLinks = {
-  cv: "/Badis_Cloud_DevOps.pdf",
+  cv: "/Badis_Freelance.pdf",
   github: "https://github.com/Badis-M",
   linkedin: "https://www.linkedin.com/in/merakchi",
   consulting: "https://consulting.badismerakchi.com/",
