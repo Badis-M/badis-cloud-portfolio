@@ -211,7 +211,7 @@ const heroUi = page.lang === "fr"
             <article class="learning-card">
               <img src={learningPlatforms.kubernetes.image} alt={learningUi.kubernetesAlt} width="1280" height="720" loading="lazy" decoding="async" />
               <div class="learning-card-body">
-                <div class="learning-card-title"><h4>{learningPlatforms.kubernetes.title}</h4></div>
+                <div class="learning-card-title"><h4>{learningPlatforms.kubernetes.title}</h4><span class="learning-beta">{learningUi.beta}</span></div>
                 <p>{learningUi.kubernetesDescription}</p>
                 <ul class="compact-tags" aria-label={ui.technologies}>{kubernetesProject?.stack.map((tool) => <li>{tool}</li>)}</ul>
                 <div class="learning-card-actions">
