@@ -1,6 +1,6 @@
 ---
 import "../styles/portfolio.css";
-import { portfolioContent, portfolioLinks } from "../data/portfolioContent";
+import { portfolioContent, portfolioLinks, learningPlatforms } from "../data/portfolioContent";
 import { portfolioPresentation, education, certifications, earlierExperiences } from "../data/portfolioPresentation";
 
 type PortfolioContent = (typeof portfolioContent)[keyof typeof portfolioContent];
@@ -8,6 +8,9 @@ type PortfolioContent = (typeof portfolioContent)[keyof typeof portfolioContent]
 const page = (Astro.props.content ?? portfolioContent.en) as PortfolioContent;
 const [featuredClientEngagement, ...otherClientEngagements] = page.clientEngagements;
 const ui = portfolioPresentation[page.lang as "fr" | "en"];
+const learningUi = learningPlatforms[page.lang as "fr" | "en"];
+const kubernetesProject = page.projects.find((project) => project.link === learningPlatforms.kubernetes.repository);
+const otherProjects = page.projects.filter((project) => project.link !== learningPlatforms.kubernetes.repository);
 const [availabilityLabel, availabilityContext] = ui.status.split(" — ");
 
 const siteUrl = Astro.site ?? new URL("https://portfolio.badismerakchi.com");
@@ -111,10 +114,17 @@ const heroUi = page.lang === "fr"
           <p class="hero-name">Badis Merakchi</p>
           <h1 id="hero-title">{ui.role.replace(/ Consultant$/, "")} <em class="accent-text">Consultant</em></h1>
           <p class="hero-value">{ui.value}</p>
-          <p class="hero-intro">{page.hero.lead}</p>
+          <div class="hero-copy">
+            <p class="hero-intro">{page.hero.lead}</p>
+            <div class="hero-teaching">
+              <p class="hero-intro">{page.hero.teachingLead}</p>
+              <p class="hero-intro">{page.hero.platformsLead}</p>
+            </div>
+          </div>
           <div class="actions">
             <a class="button primary" href={portfolioLinks.cv}>{page.hero.cvButton}</a>
             <a class="button secondary" href="#projects">{heroUi.projectsButton}</a>
+            <a class="button learning-shortcut" href="#learning-platforms">{learningUi.heroLink}<span aria-hidden="true"> →</span></a>
           </div>
           <div class="profile-links" aria-label={heroUi.profileLinksLabel}>
             <a href={portfolioLinks.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
@@ -181,6 +191,38 @@ const heroUi = page.lang === "fr"
 
       <section id="projects" class="section">
         <div class="section-heading"><span class="section-number">03 —</span><h2>{ui.projects}</h2><span class="section-rule" aria-hidden="true"></span></div>
+        <div id="learning-platforms" class="learning-platforms" aria-labelledby="learning-platforms-title">
+          <div class="learning-heading">
+            <h3 id="learning-platforms-title">{learningUi.title}</h3>
+            <p>{learningUi.intro}</p>
+          </div>
+          <div class="learning-grid">
+            <article class="learning-card">
+              <img src={learningPlatforms.academy.image} alt={learningUi.academyAlt} width="1280" height="720" loading="lazy" decoding="async" />
+              <div class="learning-card-body">
+                <div class="learning-card-title"><h4>{learningPlatforms.academy.title}</h4><span class="learning-beta">{learningUi.beta}</span></div>
+                <p>{learningUi.academyDescription}</p>
+                <ul class="compact-tags" aria-label={ui.technologies}>{learningPlatforms.academy.topics.map((topic) => <li>{topic}</li>)}</ul>
+                <div class="learning-card-actions">
+                  <a class="button primary" href={learningPlatforms.academy.url} target="_blank" rel="noopener noreferrer" aria-label={`${learningUi.explore} — ${learningPlatforms.academy.title}`}>{learningUi.explore}<span aria-hidden="true"> ↗</span></a>
+                </div>
+              </div>
+            </article>
+            <article class="learning-card">
+              <img src={learningPlatforms.kubernetes.image} alt={learningUi.kubernetesAlt} width="1280" height="720" loading="lazy" decoding="async" />
+              <div class="learning-card-body">
+                <div class="learning-card-title"><h4>{learningPlatforms.kubernetes.title}</h4></div>
+                <p>{learningUi.kubernetesDescription}</p>
+                <ul class="compact-tags" aria-label={ui.technologies}>{kubernetesProject?.stack.map((tool) => <li>{tool}</li>)}</ul>
+                <div class="learning-card-actions">
+                  <a class="button primary" href={learningPlatforms.kubernetes.url} target="_blank" rel="noopener noreferrer" aria-label={`${learningUi.explore} — ${learningPlatforms.kubernetes.title}`}>{learningUi.explore}<span aria-hidden="true"> ↗</span></a>
+                  <a class="project-link" href={learningPlatforms.kubernetes.repository} target="_blank" rel="noopener noreferrer">{page.projectsSection.repositoryLabel}</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <h3 class="eyebrow infrastructure-projects-title">{learningUi.engineeringTitle}</h3>
         <div class="featured-project-grid">
           {[page.featuredProject, page.spotlightProject].map((project) => (
             <article class="featured-project-card">
@@ -197,7 +239,7 @@ const heroUi = page.lang === "fr"
         </div>
         <p class="eyebrow other-projects-title">{page.projectsSection.otherEyebrow}</p>
         <div class="projects-grid">
-          {page.projects.map((project) => (
+          {otherProjects.map((project) => (
             <article class="project-card">
               <h3>{project.title}</h3><p>{project.description}</p>
               <ul class="compact-tags" aria-label={ui.technologies}>{project.stack.map((tool) => <li>{tool}</li>)}</ul>

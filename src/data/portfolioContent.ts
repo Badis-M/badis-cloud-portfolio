@@ -51,6 +51,45 @@ const sharedProjectLinks = {
   k8sVisualOpsLive: "https://k8s.badismerakchi.com",
 } as const;
 
+export const learningPlatforms = {
+  academy: {
+    title: "Infra Academy",
+    url: "https://academy.badismerakchi.com/",
+    image: "/images/projects/infra-academy.png",
+    topics: ["Cloud", "DevOps", "Platform", "SRE"],
+  },
+  kubernetes: {
+    title: "K8s Visual Ops Lab",
+    url: sharedProjectLinks.k8sVisualOpsLive,
+    repository: sharedProjectLinks.k8sVisualOps,
+    image: "/images/projects/k8s-visual-ops.png",
+  },
+  fr: {
+    heroLink: "Explorer mes plateformes pédagogiques",
+    title: "Plateformes pédagogiques",
+    intro: "Deux projets personnels pour rendre l’infrastructure plus concrète : expliquer les concepts, les visualiser et les mettre en pratique.",
+    beta: "Bêta",
+    academyDescription: "Explorer l’infrastructure, le Cloud, DevOps et SRE à travers des explications et des exercices pratiques à exécuter sur sa propre machine.",
+    kubernetesDescription: "Comprendre Kubernetes grâce à des schémas d’architecture interactifs et des labs guidés sur un cluster local kind.",
+    academyAlt: "Aperçu d’Infra Academy : accueil et exemple de terminal interactif.",
+    kubernetesAlt: "Aperçu de K8s Visual Ops Lab : présentation et visualisation du cluster Kubernetes.",
+    explore: "Explorer la plateforme",
+    engineeringTitle: "Projets d’infrastructure",
+  },
+  en: {
+    heroLink: "Explore my learning platforms",
+    title: "Learning platforms",
+    intro: "Two personal projects that make infrastructure tangible: explain the concepts, visualise them and put them into practice.",
+    beta: "Beta",
+    academyDescription: "Explore infrastructure, Cloud, DevOps and SRE through explanations and practical exercises to run on your own machine.",
+    kubernetesDescription: "Understand Kubernetes through interactive architecture diagrams and guided labs on a local kind cluster.",
+    academyAlt: "Infra Academy preview: homepage and interactive terminal example.",
+    kubernetesAlt: "K8s Visual Ops Lab preview: introduction and Kubernetes cluster visualisation.",
+    explore: "Explore the platform",
+    engineeringTitle: "Infrastructure projects",
+  },
+} as const;
+
 export const portfolioContent = {
   en: {
     lang: "en",
@@ -72,6 +111,10 @@ export const portfolioContent = {
       title: "Cloud & DevOps Engineer building secure, automated cloud platforms.",
       lead:
         "IT professional with more than eight years of experience, including senior cloud consulting at Oracle Geneva for Swiss clients. Focused on Infrastructure as Code, automation, CI/CD, security, and operations across OCI, AWS, and Azure.",
+      teachingLead:
+        "I enjoy sharing knowledge, leading workshops and helping others grow, both within the teams I work with and through my personal projects.",
+      platformsLead:
+        "That is why I am actively developing learning platforms such as Infra Academy and K8s Visual Ops Lab: evolving projects that combine visual explanations and practical exercises to make infrastructure more accessible.",
       cvButton: "Download CV",
       availability: "Currently Available",
       metrics: [
@@ -341,6 +384,10 @@ export const portfolioContent = {
       title: "Cloud & DevOps Engineer spécialisé dans les plateformes cloud sécurisées et automatisées.",
       lead:
         "Professionnel IT avec plus de huit ans d'expérience, dont une expérience de Senior Cloud Consultant chez Oracle à Genève pour des clients suisses. Spécialisé en Infrastructure as Code, automatisation, CI/CD, sécurité et opérations sur OCI, AWS et Azure.",
+      teachingLead:
+        "J’aime partager mes connaissances, animer des workshops et transmettre, aussi bien au sein des équipes avec lesquelles je travaille que dans mes projets personnels.",
+      platformsLead:
+        "C’est dans cet esprit que je développe activement des plateformes pédagogiques comme Infra Academy et K8s Visual Ops Lab : des projets en évolution, qui associent explications visuelles et exercices pratiques pour rendre l’infrastructure plus accessible.",
       cvButton: "Télécharger le CV",
       availability: "Disponible actuellement",
       metrics: [

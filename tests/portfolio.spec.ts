@@ -50,7 +50,7 @@ test.describe("Portfolio", () => {
   test("French page loads through language switch and main buttons point to the expected URLs", async ({ page }) => {
     await page.goto("/");
 
-    await page.getByRole("link", { name: "FR" }).click();
+    await page.getByRole("link", { name: "FR", exact: true }).click();
 
     await expect(page).toHaveURL(/\/fr\/?$/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Senior Cloud & DevOps Consultant");
@@ -190,7 +190,7 @@ test.describe("Portfolio", () => {
     await expect(page.locator(`a[href="${externalLinks.awsEksLandingZone}"]`)).toHaveText("View repository →");
     await expect(page.locator(`a[href="${externalLinks.pokedexLive}"]`)).toHaveText("View live site →");
     await expect(page.locator(`a[href="${externalLinks.pokedexRepository}"]`)).toHaveText("View repository →");
-    await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsLive}"]`)).toHaveText("View live site →");
+    await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsLive}"]`)).toContainText("Explore the platform");
     await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsRepository}"]`)).toHaveText("View repository →");
   });
 
@@ -203,7 +203,7 @@ test.describe("Portfolio", () => {
     await expect(page.locator(`a[href="${externalLinks.awsEksLandingZone}"]`)).toHaveText("Voir le repository →");
     await expect(page.locator(`a[href="${externalLinks.pokedexLive}"]`)).toHaveText("Voir le site live →");
     await expect(page.locator(`a[href="${externalLinks.pokedexRepository}"]`)).toHaveText("Voir le repository →");
-    await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsLive}"]`)).toHaveText("Voir le site live →");
+    await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsLive}"]`)).toContainText("Explorer la plateforme");
     await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsRepository}"]`)).toHaveText("Voir le repository →");
   });
 
@@ -212,6 +212,36 @@ test.describe("Portfolio", () => {
 
     expect(response.ok()).toBeTruthy();
     expect(response.headers()["content-type"]).toContain("application/pdf");
+  });
+
+  test("learning platforms are reachable, illustrated and not duplicated", async ({ page }, testInfo) => {
+    for (const path of ["/", "/fr/"]) {
+      for (const width of [390, 1440]) {
+        await page.setViewportSize({ width, height: 1000 });
+        await page.goto(path);
+        await expect(page.locator(".hero-teaching")).toContainText(
+          path === "/" ? "leading workshops" : "animer des workshops",
+        );
+        await expect(page.locator(".hero-teaching")).toContainText(
+          path === "/" ? "actively developing learning platforms" : "développe activement des plateformes pédagogiques",
+        );
+        await page.locator(".learning-shortcut").click();
+        await expect(page).toHaveURL(/#learning-platforms$/);
+        const platforms = page.locator("#learning-platforms");
+        await expect(platforms.locator(".learning-card")).toHaveCount(2);
+        await expect(page.getByRole("heading", { name: "K8s Visual Ops Lab", exact: true })).toHaveCount(1);
+        await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsLive}"]`)).toHaveCount(1);
+        await expect(platforms.locator('a[href="https://academy.badismerakchi.com/"]')).toHaveAttribute("target", "_blank");
+        for (const image of await platforms.locator("img").all()) {
+          await image.scrollIntoViewIfNeeded();
+          await expect(image).toHaveAttribute("alt", /.+/);
+          await expect.poll(() => image.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBeTruthy();
+        }
+        await page.evaluate(() => document.fonts.ready);
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
+        await platforms.screenshot({ path: testInfo.outputPath(`learning-${path === "/" ? "en" : "fr"}-${width}.png`) });
+      }
+    }
   });
 
   test("editorial theme uses local fonts and works without JavaScript", async ({ browser, request }) => {
