@@ -17,6 +17,25 @@ const externalLinks = {
 };
 
 test.describe("Portfolio", () => {
+  test.beforeEach(async ({ page }) => {
+    // Keep local and CI browser checks out of production analytics.
+    await page.route("https://static.cloudflareinsights.com/beacon.min.js", (route) =>
+      route.fulfill({ contentType: "application/javascript", body: "" }),
+    );
+  });
+
+  test("both languages include exactly one unbundled analytics beacon", async ({ page }) => {
+    for (const path of ["/", "/fr/"]) {
+      await page.goto(path);
+      const beacon = page.locator('script[src="https://static.cloudflareinsights.com/beacon.min.js"]');
+      await expect(beacon).toHaveCount(1);
+      await expect(beacon).toHaveAttribute("type", "module");
+      expect(JSON.parse((await beacon.getAttribute("data-cf-beacon")) ?? "{}")).toEqual({
+        token: "ff718cf9ce144ac99ec23aea5aaf09d8",
+      });
+    }
+  });
+
   test("English homepage loads and main buttons point to the expected URLs", async ({ page }) => {
     await page.goto("/");
 
