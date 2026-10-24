@@ -407,7 +407,7 @@ export const portfolioContent = {
       eyebrow: "Expérience professionnelle",
       title: "Oracle — Senior Cloud Consultant",
       oracleLocation: "Genève, Suisse",
-      oraclePeriod: "Avril 2022 – Décembre 2025",
+      oraclePeriod: "Avril 2022 – Janvier 2026",
       oracleDescription:
         "Cloud consulting et delivery d'infrastructures dans des environnements suisses bancaires, financiers, industriels et orientés data. L'expérience professionnelle couvre OCI, AWS et Azure, notamment les landing zones, Terraform, Ansible, la CI/CD, Kubernetes, EKS, AKS, la sécurité cloud, le FinOps et la préparation opérationnelle.",
       featuredEngagementLabel: "Mission principale",

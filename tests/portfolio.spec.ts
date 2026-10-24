@@ -117,7 +117,7 @@ test.describe("Portfolio", () => {
     await page.goto("/fr");
 
     await expect(page.locator("#experience").getByRole("heading", { name: "Senior Cloud Consultant", exact: true })).toBeVisible();
-    await expect(page.getByText("Avril 2022 – Décembre 2025", { exact: false })).toBeVisible();
+    await expect(page.getByText("Avril 2022 – Janvier 2026", { exact: false })).toBeVisible();
     await expect(page.locator(".featured-client-engagement")).toContainText("Avaloq");
     const clientEngagements = page.locator(".client-engagement-grid");
     for (const client of ["Rothschild", "Swissquote", "Corner Bank", "LEMO", "IEC"]) {
