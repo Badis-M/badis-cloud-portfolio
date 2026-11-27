@@ -34,21 +34,11 @@ const sharedStacks = {
     "Prometheus",
     "Grafana",
   ],
-  ephemeralWeb: ["AWS", "Terraform", "Ansible", "Docker", "SSM", "EC2", "VPC", "IAM", "Nginx", "GitHub Actions"],
-  eksLandingZone: ["AWS", "Amazon EKS", "Terraform", "Kubernetes", "Helm", "Metrics Server", "Amazon ECR", "AWS Load Balancer"],
-  pokedex: ["Node.js", "Docker", "Terraform", "Ansible", "AWS", "Caddy", "Cloudflare Workers"],
-  k8sVisualOps: ["Kubernetes", "kind", "Docker", "FastAPI", "kubectl", "Linux", "Networking"],
 } as const;
 
 const sharedProjectLinks = {
   featured: "https://github.com/Badis-M/aws-eks-platform-golden-path",
   azureMigration: "https://github.com/Badis-M/azure-legacy-app-migration-lab",
-  ephemeralWeb: "https://github.com/Badis-M/aws-ephemeral-web-platform",
-  eksLandingZone: "https://github.com/Badis-M/aws-eks-landing-zone",
-  pokedex: "https://github.com/Badis-M/pokedex-devops-deployment-lab",
-  pokedexLive: "https://pokedex.badismerakchi.com/",
-  k8sVisualOps: "https://github.com/Badis-M/k8s-visual-ops-lab",
-  k8sVisualOpsLive: "https://k8s.badismerakchi.com",
 } as const;
 
 export const learningPlatforms = {
@@ -58,33 +48,19 @@ export const learningPlatforms = {
     image: "/images/projects/infra-academy.png",
     topics: ["Cloud", "DevOps", "Platform", "SRE"],
   },
-  kubernetes: {
-    title: "K8s Visual Ops Lab",
-    url: sharedProjectLinks.k8sVisualOpsLive,
-    repository: sharedProjectLinks.k8sVisualOps,
-    image: "/images/projects/k8s-visual-ops.png",
-  },
   fr: {
-    heroLink: "Explorer mes plateformes pédagogiques",
-    title: "Plateformes pédagogiques",
-    intro: "Deux projets personnels pour rendre l’infrastructure plus concrète : expliquer les concepts, les visualiser et les mettre en pratique.",
+    heroLink: "Découvrir Infra Academy",
     beta: "Bêta",
     academyDescription: "Explorer l’infrastructure, le Cloud, DevOps et SRE à travers des explications et des exercices pratiques à exécuter sur sa propre machine.",
-    kubernetesDescription: "Comprendre Kubernetes grâce à des schémas d’architecture interactifs et des labs guidés sur un cluster local kind.",
-    academyAlt: "Aperçu d’Infra Academy : accueil et exemple de terminal interactif.",
-    kubernetesAlt: "Aperçu de K8s Visual Ops Lab : présentation et visualisation du cluster Kubernetes.",
+    academyAlt: "Accueil d’Infra Academy avec les accès aux cours, labs et incidents.",
     explore: "Explorer la plateforme",
     engineeringTitle: "Projets d’infrastructure",
   },
   en: {
-    heroLink: "Explore my learning platforms",
-    title: "Learning platforms",
-    intro: "Two personal projects that make infrastructure tangible: explain the concepts, visualise them and put them into practice.",
+    heroLink: "Explore Infra Academy",
     beta: "Beta",
     academyDescription: "Explore infrastructure, Cloud, DevOps and SRE through explanations and practical exercises to run on your own machine.",
-    kubernetesDescription: "Understand Kubernetes through interactive architecture diagrams and guided labs on a local kind cluster.",
-    academyAlt: "Infra Academy preview: homepage and interactive terminal example.",
-    kubernetesAlt: "K8s Visual Ops Lab preview: introduction and Kubernetes cluster visualisation.",
+    academyAlt: "Infra Academy homepage with links to courses, labs and incidents.",
     explore: "Explore the platform",
     engineeringTitle: "Infrastructure projects",
   },
@@ -114,7 +90,7 @@ export const portfolioContent = {
       teachingLead:
         "I enjoy sharing knowledge, leading workshops and helping others grow, both within the teams I work with and through my personal projects.",
       platformsLead:
-        "That is why I am actively developing learning platforms such as Infra Academy and K8s Visual Ops Lab: evolving projects that combine visual explanations and practical exercises to make infrastructure more accessible.",
+        "I develop Infra Academy to make infrastructure more accessible through visual explanations and practical exercises.",
       cvButton: "Download CV",
       availability: "Currently Available",
       metrics: [
@@ -134,7 +110,7 @@ export const portfolioContent = {
       eyebrow: "Professional experience",
       title: "Oracle — Senior Cloud Consultant",
       oracleLocation: "Geneva, Switzerland",
-      oraclePeriod: "April 2022 – January 2026",
+      oraclePeriod: "2022 – 2026",
       oracleDescription:
         "Cloud consulting and infrastructure delivery across Swiss banking, financial, industrial, and data-oriented environments. Professional work covered OCI, AWS, and Azure, including landing zones, Terraform, Ansible, CI/CD, Kubernetes, EKS, AKS, cloud security, FinOps, and operational readiness.",
       featuredEngagementLabel: "Primary engagement",
@@ -153,10 +129,6 @@ export const portfolioContent = {
       stackTitle: "Stack",
       featuredRepositoryLabel: "View featured repository →",
       spotlightRepositoryLabel: "View featured repository →",
-      otherEyebrow: "Other projects",
-      otherTitle: "Additional infrastructure automation and cloud-native delivery projects",
-      liveSiteLabel: "View live site →",
-      repositoryLabel: "View repository →",
     },
 
     contactSection: {
@@ -196,18 +168,20 @@ export const portfolioContent = {
       {
         client: "Avaloq",
         title: "Multi-cloud platforms and landing zones",
+        outcome: "I helped standardise AWS and OCI infrastructure across three environments: development, staging and production. Reusable provisioning and approval gates gave teams a consistent way to roll out changes. I also administered Kubernetes clusters.",
         highlights: [
           "AWS and OCI landing zones across development, staging, and production environments",
           "Terraform provisioning and reusable infrastructure patterns",
           "Ansible post-provisioning configuration",
           "GitHub Actions pipelines with controlled approvals",
-          "Professional Kubernetes work with Amazon EKS",
+          "Kubernetes cluster administration and work with Amazon EKS",
           "IAM, networking, governance, and OCI Cloud Guard",
         ],
       },
       {
         client: "Rothschild",
         title: "Secure SFTP infrastructure on OCI",
+        outcome: "I helped set up a dedicated SFTP service on OCI for sensitive data transfers, with controlled network access, SSH key authentication and audit mechanisms.",
         highlights: [
           "OCI compute, VCN, subnets, and public/private addressing",
           "Secure transfers with SSH keys, IAM, SSO, and audit mechanisms",
@@ -218,6 +192,7 @@ export const portfolioContent = {
       {
         client: "Swissquote",
         title: "Exadata Cloud@Customer migration support",
+        outcome: "I worked directly with Swissquote’s technical teams to support database migration and tuning in a critical banking environment.",
         highlights: [
           "Database migration support and tuning",
           "Delivery in a critical banking environment",
@@ -227,6 +202,7 @@ export const portfolioContent = {
       {
         client: "Corner Bank",
         title: "Exadata Cloud@Customer migration support",
+        outcome: "I supported the database migration to Exadata Cloud@Customer with migration scripts and database tuning.",
         highlights: [
           "Database migration support towards Exadata Cloud@Customer",
           "Scripts supporting the migration",
@@ -237,6 +213,7 @@ export const portfolioContent = {
       {
         client: "LEMO",
         title: "OCI Landing Zone",
+        outcome: "I helped build a reproducible OCI foundation for the migration. The automated setup covered network and access rules so they could be reapplied consistently.",
         highlights: [
           "Automated infrastructure provisioning with Terraform",
           "Networking, IAM, and cloud governance",
@@ -247,6 +224,7 @@ export const portfolioContent = {
       {
         client: "IEC",
         title: "Data and analytics platform",
+        outcome: "I helped connect data transfer and transformation to analytics, so prepared datasets could be queried in the warehouse and explored through Oracle Analytics.",
         highlights: [
           "ETL/ELT workflows for a data and analytics platform",
           "Oracle Autonomous Data Warehouse (ADW)",
@@ -330,38 +308,6 @@ export const portfolioContent = {
       link: sharedProjectLinks.azureMigration,
     },
 
-    projects: [
-      {
-        title: "AWS Ephemeral Web Platform",
-        description:
-          "Ephemeral AWS infrastructure project for provisioning a secure web platform with Terraform, configuring services with Ansible, operating access through AWS Systems Manager, and validating a cost-aware create/destroy lifecycle.",
-        stack: sharedStacks.ephemeralWeb,
-        link: sharedProjectLinks.ephemeralWeb,
-      },
-      {
-        title: "AWS EKS Landing Zone",
-        description:
-          "AWS EKS foundation project built with Terraform to provision a reproducible Kubernetes platform, validate Helm-based tooling, deploy workloads, expose services, and manage cost-aware apply/destroy lifecycle operations.",
-        stack: sharedStacks.eksLandingZone,
-        link: sharedProjectLinks.eksLandingZone,
-      },
-      {
-        title: "Pokédex DevOps Deployment Lab",
-        description:
-          "DevOps delivery project taking a Node.js application through Docker, AWS infrastructure, HTTPS, DNS, Ansible, and CI.",
-        stack: sharedStacks.pokedex,
-        liveUrl: sharedProjectLinks.pokedexLive,
-        link: sharedProjectLinks.pokedex,
-      },
-      {
-        title: "Kubernetes Visual Ops Lab",
-        description:
-          "Visual Kubernetes platform explaining core cluster concepts, the kubectl apply flow, and local deployment workflows with Docker, kind, and FastAPI.",
-        stack: sharedStacks.k8sVisualOps,
-        liveUrl: sharedProjectLinks.k8sVisualOpsLive,
-        link: sharedProjectLinks.k8sVisualOps,
-      },
-    ],
   },
 
   fr: {
@@ -387,7 +333,7 @@ export const portfolioContent = {
       teachingLead:
         "J’aime partager mes connaissances, animer des workshops et transmettre, aussi bien au sein des équipes avec lesquelles je travaille que dans mes projets personnels.",
       platformsLead:
-        "C’est dans cet esprit que je développe activement des plateformes pédagogiques comme Infra Academy et K8s Visual Ops Lab : des projets en évolution, qui associent explications visuelles et exercices pratiques pour rendre l’infrastructure plus accessible.",
+        "Je développe Infra Academy pour rendre l’infrastructure plus accessible grâce à des explications visuelles et des exercices pratiques.",
       cvButton: "Télécharger le CV",
       availability: "Disponible actuellement",
       metrics: [
@@ -407,7 +353,7 @@ export const portfolioContent = {
       eyebrow: "Expérience professionnelle",
       title: "Oracle — Senior Cloud Consultant",
       oracleLocation: "Genève, Suisse",
-      oraclePeriod: "Avril 2022 – Janvier 2026",
+      oraclePeriod: "2022 – 2026",
       oracleDescription:
         "Cloud consulting et delivery d'infrastructures dans des environnements suisses bancaires, financiers, industriels et orientés data. L'expérience professionnelle couvre OCI, AWS et Azure, notamment les landing zones, Terraform, Ansible, la CI/CD, Kubernetes, EKS, AKS, la sécurité cloud, le FinOps et la préparation opérationnelle.",
       featuredEngagementLabel: "Mission principale",
@@ -426,10 +372,6 @@ export const portfolioContent = {
       stackTitle: "Stack",
       featuredRepositoryLabel: "Voir le repository →",
       spotlightRepositoryLabel: "Voir le repository →",
-      otherEyebrow: "Autres projets",
-      otherTitle: "Projets complémentaires d'automatisation d'infrastructure et de delivery cloud-native",
-      liveSiteLabel: "Voir le site live →",
-      repositoryLabel: "Voir le repository →",
     },
 
     contactSection: {
@@ -469,18 +411,20 @@ export const portfolioContent = {
       {
         client: "Avaloq",
         title: "Plateformes multi-cloud et landing zones",
+        outcome: "J’ai contribué à standardiser l’infrastructure AWS et OCI sur trois environnements : développement, staging et production. Les modèles réutilisables et les étapes de validation ont donné aux équipes un cadre commun pour déployer les changements. J’ai également administré des clusters Kubernetes.",
         highlights: [
           "Landing zones AWS et OCI pour les environnements de développement, staging et production",
           "Provisioning Terraform et patterns d'infrastructure réutilisables",
           "Configuration post-provisioning avec Ansible",
           "Pipelines GitHub Actions avec approbations contrôlées",
-          "Expérience professionnelle Kubernetes avec Amazon EKS",
+          "Administration de clusters Kubernetes et interventions sur Amazon EKS",
           "IAM, networking, gouvernance et OCI Cloud Guard",
         ],
       },
       {
         client: "Rothschild",
         title: "Infrastructure SFTP sécurisée sur OCI",
+        outcome: "J’ai contribué à mettre en place un service SFTP dédié sur OCI pour transférer des données sensibles, avec un accès réseau contrôlé, une authentification par clé SSH et des mécanismes d’audit.",
         highlights: [
           "OCI Compute, VCN, subnets et adressage public/privé",
           "Transferts sécurisés avec clés SSH, IAM, SSO et mécanismes d'audit",
@@ -491,6 +435,7 @@ export const portfolioContent = {
       {
         client: "Swissquote",
         title: "Support de migration Exadata Cloud@Customer",
+        outcome: "J’ai travaillé directement avec les équipes techniques de Swissquote pour accompagner la migration et le réglage des performances de bases de données dans un environnement bancaire critique.",
         highlights: [
           "Support migration de bases de données et tuning",
           "Delivery dans un environnement bancaire critique",
@@ -500,6 +445,7 @@ export const portfolioContent = {
       {
         client: "Corner Bank",
         title: "Support de migration Exadata Cloud@Customer",
+        outcome: "J’ai accompagné la migration des bases de données vers Exadata Cloud@Customer avec des scripts de migration et du réglage des performances.",
         highlights: [
           "Support de migration de bases vers Exadata Cloud@Customer",
           "Scripts associés à la migration",
@@ -510,6 +456,7 @@ export const portfolioContent = {
       {
         client: "LEMO",
         title: "OCI Landing Zone",
+        outcome: "J’ai contribué à créer un socle OCI reproductible pour la migration. L’automatisation couvrait les règles réseau et les accès pour pouvoir les réappliquer de façon cohérente.",
         highlights: [
           "Provisioning automatisé de l'infrastructure avec Terraform",
           "Networking, IAM et gouvernance cloud",
@@ -520,6 +467,7 @@ export const portfolioContent = {
       {
         client: "IEC",
         title: "Plateforme Data et Analytics",
+        outcome: "J’ai contribué à relier le transfert et la transformation des données à leur exploitation. Les données préparées pouvaient être interrogées dans l’entrepôt puis explorées dans Oracle Analytics.",
         highlights: [
           "Workflows ETL/ELT pour une plateforme Data et Analytics",
           "Oracle Autonomous Data Warehouse (ADW)",
@@ -601,37 +549,5 @@ export const portfolioContent = {
       link: sharedProjectLinks.azureMigration,
     },
 
-    projects: [
-      {
-        title: "AWS Ephemeral Web Platform",
-        description:
-          "Projet d'infrastructure AWS éphémère pour provisionner une plateforme web sécurisée avec Terraform, configurer les services avec Ansible, opérer l'accès via AWS Systems Manager et valider un lifecycle create/destroy maîtrisé côté coûts.",
-        stack: sharedStacks.ephemeralWeb,
-        link: sharedProjectLinks.ephemeralWeb,
-      },
-      {
-        title: "AWS EKS Landing Zone",
-        description:
-          "Projet de fondation AWS EKS construit avec Terraform pour provisionner une plateforme Kubernetes reproductible, valider les outils Helm, déployer des workloads, exposer des services et gérer un lifecycle apply/destroy maîtrisé côté coûts.",
-        stack: sharedStacks.eksLandingZone,
-        link: sharedProjectLinks.eksLandingZone,
-      },
-      {
-        title: "Pokédex DevOps Deployment Lab",
-        description:
-          "Projet de delivery DevOps amenant une application Node.js à travers Docker, infrastructure AWS, HTTPS, DNS, Ansible et CI.",
-        stack: sharedStacks.pokedex,
-        liveUrl: sharedProjectLinks.pokedexLive,
-        link: sharedProjectLinks.pokedex,
-      },
-      {
-        title: "Kubernetes Visual Ops Lab",
-        description:
-          "Plateforme visuelle Kubernetes expliquant les concepts essentiels du cluster, le flow kubectl apply et les workflows de déploiement local avec Docker, kind et FastAPI.",
-        stack: sharedStacks.k8sVisualOps,
-        liveUrl: sharedProjectLinks.k8sVisualOpsLive,
-        link: sharedProjectLinks.k8sVisualOps,
-      },
-    ],
   },
 } as const;

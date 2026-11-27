@@ -98,7 +98,7 @@ test.describe("Portfolio", () => {
     await page.goto("/");
 
     await expect(page.locator("#experience").getByRole("heading", { name: "Senior Cloud Consultant", exact: true })).toBeVisible();
-    await expect(page.getByText("April 2022 – January 2026", { exact: false })).toBeVisible();
+    await expect(page.locator(".experience-heading .date-badge")).toHaveText("2022 – 2026");
     await expect(page.locator(".featured-client-engagement")).toContainText("Avaloq");
     const clientEngagements = page.locator(".client-engagement-grid");
     for (const client of ["Rothschild", "Swissquote", "Corner Bank", "LEMO", "IEC"]) {
@@ -110,14 +110,14 @@ test.describe("Portfolio", () => {
     for (const tool of ["Kubernetes", "EKS", "AKS", "Prometheus", "Grafana", "ServiceMonitor"]) {
       await expect(professionalDelivery).toContainText(tool);
     }
-    await expect(page.locator("footer")).toContainText("Based in Lausanne");
+    await expect(page.locator("footer")).toContainText("Geneva–Lausanne region");
   });
 
   test("French page presents professional delivery in one section", async ({ page }) => {
     await page.goto("/fr");
 
     await expect(page.locator("#experience").getByRole("heading", { name: "Senior Cloud Consultant", exact: true })).toBeVisible();
-    await expect(page.getByText("Avril 2022 – Janvier 2026", { exact: false })).toBeVisible();
+    await expect(page.locator(".experience-heading .date-badge")).toHaveText("2022 – 2026");
     await expect(page.locator(".featured-client-engagement")).toContainText("Avaloq");
     const clientEngagements = page.locator(".client-engagement-grid");
     for (const client of ["Rothschild", "Swissquote", "Corner Bank", "LEMO", "IEC"]) {
@@ -129,7 +129,7 @@ test.describe("Portfolio", () => {
     for (const tool of ["Kubernetes", "EKS", "AKS", "Prometheus", "Grafana", "ServiceMonitor"]) {
       await expect(professionalDelivery).toContainText(tool);
     }
-    await expect(page.locator("footer")).toContainText("Basé à Lausanne");
+    await expect(page.locator("footer")).toContainText("Région Genève–Lausanne");
   });
 
   test("bilingual pages keep the new proof sections within the mobile viewport", async ({ page }) => {
@@ -186,12 +186,12 @@ test.describe("Portfolio", () => {
 
     await expect(page.locator(`a[href="${externalLinks.featuredRepository}"]`)).toHaveText("View featured repository →");
     await expect(page.locator(`a[href="${externalLinks.azureMigration}"]`)).toHaveText("View featured repository →");
-    await expect(page.locator(`a[href="${externalLinks.awsEphemeralWebPlatform}"]`)).toHaveText("View repository →");
-    await expect(page.locator(`a[href="${externalLinks.awsEksLandingZone}"]`)).toHaveText("View repository →");
-    await expect(page.locator(`a[href="${externalLinks.pokedexLive}"]`)).toHaveText("View live site →");
-    await expect(page.locator(`a[href="${externalLinks.pokedexRepository}"]`)).toHaveText("View repository →");
-    await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsLive}"]`)).toContainText("Explore the platform");
-    await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsRepository}"]`)).toHaveText("View repository →");
+    await expect(page.locator(`a[href="${externalLinks.awsEphemeralWebPlatform}"]`)).toHaveCount(0);
+    await expect(page.locator(`a[href="${externalLinks.awsEksLandingZone}"]`)).toHaveCount(0);
+    await expect(page.locator(`a[href="${externalLinks.pokedexLive}"]`)).toHaveCount(0);
+    await expect(page.locator(`a[href="${externalLinks.pokedexRepository}"]`)).toHaveCount(0);
+    await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsLive}"]`)).toHaveCount(0);
+    await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsRepository}"]`)).toHaveCount(0);
   });
 
   test("French project buttons point to the expected URLs", async ({ page }) => {
@@ -199,12 +199,41 @@ test.describe("Portfolio", () => {
 
     await expect(page.locator(`a[href="${externalLinks.featuredRepository}"]`)).toHaveText("Voir le repository →");
     await expect(page.locator(`a[href="${externalLinks.azureMigration}"]`)).toHaveText("Voir le repository →");
-    await expect(page.locator(`a[href="${externalLinks.awsEphemeralWebPlatform}"]`)).toHaveText("Voir le repository →");
-    await expect(page.locator(`a[href="${externalLinks.awsEksLandingZone}"]`)).toHaveText("Voir le repository →");
-    await expect(page.locator(`a[href="${externalLinks.pokedexLive}"]`)).toHaveText("Voir le site live →");
-    await expect(page.locator(`a[href="${externalLinks.pokedexRepository}"]`)).toHaveText("Voir le repository →");
-    await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsLive}"]`)).toContainText("Explorer la plateforme");
-    await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsRepository}"]`)).toHaveText("Voir le repository →");
+    await expect(page.locator(`a[href="${externalLinks.awsEphemeralWebPlatform}"]`)).toHaveCount(0);
+    await expect(page.locator(`a[href="${externalLinks.awsEksLandingZone}"]`)).toHaveCount(0);
+    await expect(page.locator(`a[href="${externalLinks.pokedexLive}"]`)).toHaveCount(0);
+    await expect(page.locator(`a[href="${externalLinks.pokedexRepository}"]`)).toHaveCount(0);
+    await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsLive}"]`)).toHaveCount(0);
+    await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsRepository}"]`)).toHaveCount(0);
+  });
+
+  test("client view switches the grid independently of Avaloq with the keyboard in FR and EN", async ({ page }) => {
+    for (const path of ["/", "/fr/"]) {
+      await page.goto(path);
+      const outcomes = page.getByRole("radio", { name: path === "/" ? "Outcomes" : "Réalisations" });
+      const technologies = page.getByRole("radio", { name: "Technologies", exact: true });
+      await expect(outcomes).toBeChecked();
+      await expect(page.locator(".mission-outcome:visible")).toHaveCount(5);
+      await expect(page.locator(".mission-technical:visible")).toHaveCount(0);
+      await expect(page.locator(".featured-client-engagement")).toContainText(path === "/" ? "three environments" : "trois environnements");
+      await outcomes.focus();
+      await page.keyboard.press("ArrowRight");
+      await expect(technologies).toBeChecked();
+      await expect(page.locator(".mission-outcome:visible")).toHaveCount(0);
+      await expect(page.locator(".mission-technical:visible")).toHaveCount(5);
+      const avaloqDetails = page.locator(".featured-client-details");
+      await expect(avaloqDetails).not.toHaveAttribute("open", "");
+      await avaloqDetails.locator("summary").click();
+      await expect(page.locator(".featured-client-highlights")).toBeVisible();
+      await expect(page.locator(".featured-client-highlights")).toContainText(
+        path === "/" ? "Kubernetes cluster administration" : "Administration de clusters Kubernetes",
+      );
+      await technologies.focus();
+      await page.keyboard.press("ArrowLeft");
+      await expect(outcomes).toBeChecked();
+      await expect(avaloqDetails).toHaveAttribute("open", "");
+      await expect(page.locator(".mission-outcome:visible")).toHaveCount(5);
+    }
   });
 
   test("CV PDF is served", async ({ request }) => {
@@ -214,7 +243,7 @@ test.describe("Portfolio", () => {
     expect(response.headers()["content-type"]).toContain("application/pdf");
   });
 
-  test("learning platforms are reachable, illustrated and not duplicated", async ({ page }, testInfo) => {
+  test("Infra Academy and OpenClaw are visible in both languages", async ({ page }, testInfo) => {
     for (const path of ["/", "/fr/"]) {
       for (const width of [390, 1440]) {
         await page.setViewportSize({ width, height: 1000 });
@@ -223,14 +252,21 @@ test.describe("Portfolio", () => {
           path === "/" ? "leading workshops" : "animer des workshops",
         );
         await expect(page.locator(".hero-teaching")).toContainText(
-          path === "/" ? "actively developing learning platforms" : "développe activement des plateformes pédagogiques",
+          path === "/" ? "I develop Infra Academy" : "Je développe Infra Academy",
         );
         await page.locator(".learning-shortcut").click();
         await expect(page).toHaveURL(/#learning-platforms$/);
         const platforms = page.locator("#learning-platforms");
-        await expect(platforms.locator(".learning-card")).toHaveCount(2);
-        await expect(page.getByRole("heading", { name: "K8s Visual Ops Lab", exact: true })).toHaveCount(1);
-        await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsLive}"]`)).toHaveCount(1);
+        await expect(platforms.getByRole("heading", { name: "Infra Academy", exact: true })).toBeVisible();
+        await expect(page.getByRole("heading", { name: "K8s Visual Ops Lab", exact: true })).toHaveCount(0);
+        const demo = page.locator("#openclaw .agent-workflow");
+        const demoImage = demo.getByRole("img");
+        await demoImage.scrollIntoViewIfNeeded();
+        await expect.poll(() => demoImage.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBe(1180);
+        await expect(demo.getByRole("link")).toHaveAttribute("href", "/images/projects/openclaw-web-ui-demo.png");
+        await expect(demo.locator("figcaption")).toContainText(path === "/" ? "Demo data" : "Données de démonstration");
+        await expect(page.locator("#openclaw")).toContainText("Linux Security Audit");
+        await expect(page.locator(`a[href="${externalLinks.kubernetesVisualOpsLive}"]`)).toHaveCount(0);
         await expect(platforms.locator('a[href="https://academy.badismerakchi.com/"]')).toHaveAttribute("target", "_blank");
         for (const image of await platforms.locator("img").all()) {
           await image.scrollIntoViewIfNeeded();
@@ -239,8 +275,39 @@ test.describe("Portfolio", () => {
         }
         await page.evaluate(() => document.fonts.ready);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
-        await platforms.screenshot({ path: testInfo.outputPath(`learning-${path === "/" ? "en" : "fr"}-${width}.png`) });
+        const language = path === "/" ? "en" : "fr";
+        await platforms.screenshot({ path: testInfo.outputPath(`learning-${language}-${width}.png`) });
+        await page.locator("#openclaw").screenshot({ path: testInfo.outputPath(`openclaw-${language}-${width}.png`) });
       }
+    }
+  });
+
+  test("OpenClaw preview opens and closes in place", async ({ page }) => {
+    for (const [path, width, closeLabel] of [["/fr/", 390, "Fermer"], ["/", 1440, "Close"]] as const) {
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto(path);
+      const originalUrl = page.url();
+      const trigger = page.locator("[data-openclaw-preview]");
+      const preview = page.getByRole("dialog");
+      await trigger.click();
+      await expect(preview).toBeVisible();
+      await expect(preview.getByRole("button", { name: closeLabel })).toBeFocused();
+      await expect(page).toHaveURL(originalUrl);
+      await page.keyboard.press("Escape");
+      await expect(preview).toBeHidden();
+      await expect(trigger).toBeFocused();
+
+      await trigger.press("Enter");
+      await expect(preview).toBeVisible();
+      await preview.getByRole("button", { name: closeLabel }).click();
+      await expect(preview).toBeHidden();
+      await expect(trigger).toBeFocused();
+
+      await trigger.click();
+      await expect(preview).toBeVisible();
+      await page.mouse.click(2, 2);
+      await expect(preview).toBeHidden();
+      await expect(page).toHaveURL(originalUrl);
     }
   });
 
